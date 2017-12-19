@@ -2213,7 +2213,9 @@ html.no-csstransitions .home-content__main {
     text-align: left;
     max-width: 1024px;
 }
-
+.achievements-desc ul li {
+    font-size: 2.0rem;
+}
 
 /* ===================================================================
  * # about
@@ -2392,23 +2394,11 @@ html.no-csstransitions .home-content__main {
 .s-didactics {
     padding-top: 16.2rem;
     padding-bottom: 13.2rem;
-    background-color: #FFFFFF;
-    color: #757575;
+    background-color: rgb(9, 33, 78);
+    color: #0c0c0c;
     position: relative;
 }
 
-
-/* ===================================================================
- * # didactics
- *
- * ------------------------------------------------------------------- */
- .s-didactics {
-    padding-top: 16.2rem;
-    padding-bottom: 13.2rem;
-    background-color: rgb(114, 125, 126);
-    color: #757575;
-    position: relative;
-}
 
 /* ------------------------------------------------------------------- 
  * ## didactics list
@@ -2420,6 +2410,8 @@ html.no-csstransitions .home-content__main {
 .didactics-list .didactics-item {
     margin-bottom: .9rem;
     padding: 0;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .didactics-list .didactics-item h3 {
@@ -2481,12 +2473,12 @@ html.no-csstransitions .home-content__main {
 }
 
 .didactics-list .didactics-more {
-    position: absolute;
-    bottom: 10px;
-    right: 40px;
+    margin: 0 20px 10px 10px;
+    padding: 0;
+    text-align:right;
+    position: relative;
     color: #39b54a;
-    font-size: 12pt;
-    margin: 0;
+    font-size: 2.0rem;
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -2506,6 +2498,12 @@ html.no-csstransitions .home-content__main {
     .didactics-list .didactics-item:nth-child(2n+2) {
         padding-left: 30px;
     }
+    .didactics-list .didactics-more {
+        margin: 0 20px 10px 10px;
+        padding: 0;
+        text-align:right;
+        position: relative;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -2518,6 +2516,13 @@ html.no-csstransitions .home-content__main {
     .didactics-list .didactics-item:nth-child(2n+2) {
         padding-left: 20px;
     }
+    .didactics-list .didactics-more {
+        margin: 0 10px 10px 0;
+        padding: 0;
+        text-align:right;
+        position: relative;
+    }
+    
 }
 
 @media only screen and (max-width: 800px) {
@@ -2541,6 +2546,32 @@ html.no-csstransitions .home-content__main {
         float: none;
         margin-top: 0;
     }
+    .didactics-list .didactics-text {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin: 0;
+    }
+    .didactics-list .didactics-text h3{
+        margin:0;
+        padding: 0;
+    }
+    .didactics-list .didactics-text dl {
+        margin:0;
+        padding: 4rem;
+        text-align:left;
+    }
+    .didactics-list .didactics-icon {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin: 0;
+    }
+    .didactics-list .didactics-more {
+        margin: 0 10px 10px 0;
+        padding: 0;
+        text-align:right;
+        position: relative;
+    }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -2551,8 +2582,33 @@ html.no-csstransitions .home-content__main {
         padding-right: 10px;
         padding-left: 10px;
     }
-    .didactics-list h3 {
+    .didactics-list h3{
         font-size: 2.5rem;
+    }
+    .didactics-list .didactics-text {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin: 0;
+    }
+    .didactics-list .didactics-text h3{
+        margin:0;
+        padding: 0;
+    }
+    .didactics-list .didactics-text dl {
+        margin:0;
+        padding: 0;
+        text-align:left;
+    }
+    .didactics-list .didactics-icon {
+        padding-right: 10px;
+        padding-left: 10px;
+        margin: 0;
+    }
+    .didactics-list .didactics-more {
+        margin:0;
+        padding: 0;
+        text-align:center;
+        position: relative;
     }
 }
 
@@ -2562,8 +2618,15 @@ html.no-csstransitions .home-content__main {
         padding-left: 0;
     }
     .didactics-list h3 {
-        font-size: 2.5rem;
+        font-size: 2.0rem;
     }
+    .didactics-list .didactics-more {
+        margin:0;
+        padding: 0;
+        text-align:center;
+        position: relative;
+    }
+
 }
 
 
