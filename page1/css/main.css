@@ -2398,7 +2398,9 @@ html.no-csstransitions .home-content__main {
     color: #0c0c0c;
     position: relative;
 }
-
+.s-didactics h1.display-2 {
+    color: #ccc;    
+}
 
 /* ------------------------------------------------------------------- 
  * ## didactics list
@@ -2444,7 +2446,7 @@ html.no-csstransitions .home-content__main {
 
 .didactics-list .didactics-pannel {
     border: 1px solid #39b54a;
-    background-color: #fff;
+    background-color: rgb(236, 236, 236);
     border-radius: 10px;
 }
 .didactics-list .didactics-pannel:hover {
