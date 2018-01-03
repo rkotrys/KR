@@ -1,0 +1,18 @@
+app/cache/*
+!app/cache/index.html
+
+styles.html
+
+users/*
+
+.vs/*
+
+.vscode/*
+
+app/logs/*
+!app/logs/index.html
+
+!app/*/.htaccess
+
+# IDE Files
+#-------------------------

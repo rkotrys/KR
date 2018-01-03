@@ -1,0 +1,18 @@
+.language {
+    float: right;
+    padding: 10px;
+}
+.language a, .language a:visited {
+    padding: 0.5em;
+    margin: 0.1em;
+    text-align: cenetr;   
+    color: #ffffff;
+    background-color: rgb(79, 118, 163);
+    border-radius: 3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+.language a:hover {
+    background-color: rgb(39, 95, 160);
+}
