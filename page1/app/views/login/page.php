@@ -7,10 +7,10 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <?=isset($msg)?"<p>".$msg."</p>":'';?>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-7">
             <p>
                 <?=lang("english")?>
             </p>

@@ -55,6 +55,9 @@ $route['login'] = 'welcome/login';
 $route['login/(:any)'] = 'welcome/login';
 $route['login/(:any)/(:any)'] = 'welcome/login';
 
+$route['users'] = 'welcome/users';
+$route['users/(:any)'] = 'welcome/users/$1';
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

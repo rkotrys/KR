@@ -1,18 +1,19 @@
-.language {
-    float: right;
-    padding: 10px;
+body {
+    background-color: black;
+    color: silver;
 }
-.language a, .language a:visited {
-    padding: 0.5em;
-    margin: 0.1em;
-    text-align: cenetr;   
-    color: #ffffff;
-    background-color: rgb(79, 118, 163);
-    border-radius: 3px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+nav.navbar li .btn-group-vertical {
+   padding: 3px 3px 0 0;
+}
+.logo-menu {
+    width: 100px;
+}
+#languages > .btn-default {
+    background-color: #444;
     font-weight: bold;
-    font-size: 12px;
+    color: silver;
 }
-.language a:hover {
-    background-color: rgb(39, 95, 160);
+.page-header {
+   padding-bottom: 0;
+   margin-bottom:0;
 }

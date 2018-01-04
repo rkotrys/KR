@@ -45,14 +45,15 @@ class Welcome extends CI_Controller {
 		redirect(conf('base_url').conf("base_url_path").$this->input->cookie('uri'));
 	}
 
-	public function login($name = 'guest')
+	public function users($name = 'guest')
 	{
 		$data['msg'] = $this->uri->segment(1,'NO data ')." -> ".$this->uri->segment(2,'NO data ')." -> ".$this->uri->segment(3,'NO data ');
-		
+		$page['title']= "<span class=\"fa fa-users\"></span> ".lang('Users');
+		$data['page'] = $page;
 		$this->load->view('login/head');
-		$this->load->view('login/header');
+		
 		$this->load->view('login/nav');
-
+		$this->load->view('login/header', $data);
 		$this->load->view('login/page', $data); 
 
 		$this->load->view('login/footer');
