@@ -53,7 +53,7 @@ $route['lang/language/(:any)'] = "welcome/lang/language/$1";
 
 $route['login'] = 'welcome/login';
 $route['login/(:any)'] = 'welcome/login';
-$route['login/(:any)/(:any)'] = 'welcome/login';
+$route['login/(:any)/(:any)'] = 'welcome/login/$1';
 
 $route['users'] = 'welcome/users';
 $route['users/(:any)'] = 'welcome/users/$1';

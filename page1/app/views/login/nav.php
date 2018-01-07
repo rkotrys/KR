@@ -1,30 +1,35 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-<div class="container-fluid">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>                        
-    </button>
     <a class="navbar-brand" href="#myPage"><?=img("images/logo_KR_blue.png","logo-menu","Logo KR");?></a>
   </div>
+
   <div class="collapse navbar-collapse" id="myNavbar">
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><?=lang("Users")?></a></li>
-      <li><a href="#">HOME 2</a></li>
-      <li><a href="#">HOME 3</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">menu 1</a></li>
-          <li><a href="#">menu 2</a></li>
-          <li><a href="#">menu 3</a></li> 
-        </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="#"><?=lang("Users")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#">HOME 2</a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#">HOME 3</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle bg-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
       </li>
-      <li><a href="#"><?=lang("Logout")?></a></li>
-      <li><?php $this->load->view('login/language'); ?></li>
+      
     </ul>
   </div>
-</div>
+
+  <div class="float-right d-inline-flex flex-row-reverse">
+      <a class="nav-link bg-dark rounded" href="#"><span class="fa fa-sign-out" title="<?=lang("Logout")?>"></span></a>
+      <?php $this->load->view('login/language'); ?>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+  </div>
 </nav>

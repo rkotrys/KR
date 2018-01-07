@@ -1,4 +1,4 @@
-<div class="btn-group-vertical" id="languages">
-<a class="btn btn-default btn-xs" href="<?=lnk("lang/language/polish")?>"> PL </a>
-<a class="btn btn-default btn-xs" href="<?=lnk("lang/language/english")?>" > EN </a>
+<div class="btn-group" id="languages">
+<a role="button" class="btn btn-default btn-sm bg-dark" href="<?=lnk("lang/language/polish")?>"> PL </a>
+<a role="button" class="btn btn-default btn-sm bg-dark" href="<?=lnk("lang/language/english")?>" > EN </a>
 </div>

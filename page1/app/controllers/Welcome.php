@@ -16,6 +16,7 @@ class Welcome extends CI_Controller {
 		}	
 		$this->lang->load('base', $this->session->language );
 		$this->input->set_cookie('uri', $this->uri->uri_string(), 60*60*24 );
+		$this->load->database();
 	}
 
 	public function index()
@@ -47,9 +48,11 @@ class Welcome extends CI_Controller {
 
 	public function users($name = 'guest')
 	{
+		$users = $this->users->get_users();
 		$data['msg'] = $this->uri->segment(1,'NO data ')." -> ".$this->uri->segment(2,'NO data ')." -> ".$this->uri->segment(3,'NO data ');
-		$page['title']= "<span class=\"fa fa-users\"></span> ".lang('Users');
+		$page['title']= "<span class=\"fa fa-user\"></span> ".lang('Users');
 		$data['page'] = $page;
+		$data['users'] = $users;
 		$this->load->view('login/head');
 		
 		$this->load->view('login/nav');

@@ -8,10 +8,11 @@ nav.navbar li .btn-group-vertical {
 .logo-menu {
     width: 100px;
 }
+#languages {
+    position: relative;
+}
 #languages > .btn-default {
     background-color: #444;
-    font-weight: bold;
-    color: silver;
 }
 .page-header {
    padding-bottom: 0;
