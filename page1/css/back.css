@@ -1,20 +1,40 @@
 body {
-    background-color: black;
-    color: silver;
-}
-nav.navbar li .btn-group-vertical {
-   padding: 3px 3px 0 0;
-}
+  background-color: black;
+  color: silver; }
+
 .logo-menu {
-    width: 100px;
-}
+  width: 100px; }
+
 #languages {
-    position: relative;
-}
-#languages > .btn-default {
-    background-color: #444;
-}
+  position: relative; }
+  #languages > .btn-default {
+    background-color: #444; }
+
 .page-header {
-   padding-bottom: 0;
-   margin-bottom:0;
-}
+  padding-bottom: 0;
+  margin-bottom: 0; }
+
+nav .navbar li .btn-group-vertical {
+  padding: 3px 3px 0 0; }
+
+.modal-content {
+  background-color: #333333;
+  color: silver; }
+  .modal-content .modal-header {
+    border-bottom-color: #4d4d4d;
+    background-color: #262626; }
+  .modal-content .modal-body input, .modal-content .modal-body textarea, .modal-content .modal-body select {
+    background-color: black;
+    color: #39b54a;
+    font-family: "Lucida Console", Monaco, monospace;
+    border: solid 1px #4d4d4d; }
+  .modal-content .modal-body .input-group-text {
+    background-color: #333333;
+    color: #595959;
+    border: solid 1px #4d4d4d; }
+  .modal-content .modal-footer {
+    border-top-color: #4d4d4d;
+    background-color: #262626;
+    border-radius: 0 0 5px 5px; }
+
+/*# sourceMappingURL=back.css.map */

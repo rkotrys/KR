@@ -1,0 +1,63 @@
+$color-bg: black; 
+$color-font:    silver;
+$color-language-bg: #444;
+$color-modal-bg:   lighten($color-bg,20%); // rgba(51, 51, 51, 0.678);
+$color-modal-font:  silver;
+$color-green: #39b54a;
+$color-blue: #007BFF;
+$font-base: Helvetica, sans-serif;
+$font-input: "Lucida Console", Monaco, monospace;
+body {
+    background-color: $color-bg;
+    color: $color-font;
+}
+.logo-menu {
+    width: 100px;
+}
+#languages {
+    position: relative;
+    > .btn-default {
+        background-color: $color-language-bg;
+    }
+}
+.page-header {
+   padding-bottom: 0;
+   margin-bottom:0;
+}
+nav {
+    .navbar{
+        li {
+            .btn-group-vertical {
+                padding: 3px 3px 0 0;
+            }
+        }
+    }
+}
+.modal-content {
+    background-color:   $color-modal-bg;
+    color:              $color-modal-font;
+
+    .modal-header{
+        border-bottom-color: lighten($color: $color-modal-bg, $amount: 10%);
+        background-color: darken($color: $color-modal-bg, $amount: 5%);
+    }
+    .modal-body{
+        
+        input, textarea, select {
+            background-color: $color-bg;
+            color: $color-green; 
+            font-family: $font-input; 
+            border: solid 1px lighten($color: $color-modal-bg, $amount: 10%);              
+        }
+        .input-group-text {
+            background-color: $color-modal-bg;
+            color: lighten($color: $color-modal-bg, $amount: 15%);
+            border: solid 1px lighten($color: $color-modal-bg, $amount: 10%);
+        }
+    }
+    .modal-footer{
+        border-top-color: lighten($color: $color-modal-bg, $amount: 10%);
+        background-color: darken($color: $color-modal-bg, $amount: 5%);
+        border-radius: 0 0 5px 5px;
+    }
+}
