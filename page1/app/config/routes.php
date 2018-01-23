@@ -55,6 +55,9 @@ $route['login'] = 'welcome/login';
 $route['login/(:any)'] = 'welcome/login';
 $route['login/(:any)/(:any)'] = 'welcome/login/$1';
 
+$route['cmd'] = 'welcome/cmd';
+$route['cmd/(:any)'] = 'welcome/cmd/$1';
+
 $route['users'] = 'welcome/users';
 $route['users/(:any)'] = 'welcome/users/$1';
 

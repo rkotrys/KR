@@ -62,4 +62,26 @@ class Welcome extends CI_Controller {
 		$this->load->view('login/footer');
 	
 	}
+
+	public function cmd(){
+		switch( $this->input->post("cmd") ){
+			case "userdelete":
+				$userid = $this->input->post("data");
+				$data=array( 'data'=>"User with userid $userid has been deleted.", 'status'=>'OK' );
+				print( json_encode( $data, JSON_UNESCAPED_UNICODE) );
+			break;
+			case "getuser":
+				$u = $this->users->get_user($this->input->post("data"));
+				if( is_array($u) ){
+					$data=array( 'data'=>$u, 'status'=>'OK' );
+				}else{
+					$data=array( 'data'=>'No user found', 'status'=>'ERROR' );
+				}
+				print( json_encode( $data, JSON_UNESCAPED_UNICODE) );   
+			break;
+			default:
+				print("Error! no data.");
+		}
+		return;
+	}
 }

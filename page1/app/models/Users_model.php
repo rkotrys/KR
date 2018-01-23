@@ -16,5 +16,13 @@ class Users_model extends CI_Model {
         }
         return $users;
     }
+    public function get_user($userid){
+        $query = $this->db->where('userid',$userid)->get('users');
+        if( $query->num_rows()==1 ){
+            return $query->row_array();
+        }else{
+            return NULL;
+        }
+    }
 
 }

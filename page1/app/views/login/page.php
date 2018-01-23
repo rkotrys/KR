@@ -28,8 +28,8 @@
                 <td><?=$user["room"];?></td>
                 <td><?=$user["photo"];?></td>
                 <td><?=$user["level"];?></td>
-                <td class="text-right"><a href="#" onclick="alert('User ID: <?=$user["userid"]?>')" class="btn btn-sm btn-outline-primary"><span class="fa fa-edit"></span></a> 
-                    <a href="#" onclick="alert('DEL User ID: <?=$user["userid"]?>')" class="btn btn-sm btn-outline-primary"><span class="fa fa-trash"></span></a>
+                <td class="text-right"><a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
+                    <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
                 </td>
             </tr>
         <?php } ?>
@@ -113,8 +113,34 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><?=lang("Close")?></button>
-        <button type="button" class="btn btn-sm btn-primary"><?=lang("Save")?></button>
+        <button id="newusersave" type="button" class="btn btn-sm btn-primary"><?=lang("Save")?></button>
+        <input type="hidden" id="userid" name="userid" value="0" />
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="deluserModal" tabindex="-1" role="dialog" aria-labelledby="useraddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adduserModalLabel"><span class="fa fa-user"></span> <?=lang("delete user")?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="text-center">Delete: <span id="username"></span>?</h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><?=lang("Close")?></button>
+        <button id="deluser" type="button" class="btn btn-sm btn-primary"><?=lang("Delete")?></button>
+        <input type="hidden" id="userid" name="userid" value="0" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="<?=conf("base_url_path")?>js/users.js"></script>

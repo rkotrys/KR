@@ -1,10 +1,10 @@
-$color-bg: black; 
-$color-font:    silver;
-$color-language-bg: #444;
-$color-modal-bg:   lighten($color-bg,20%); // rgba(51, 51, 51, 0.678);
-$color-modal-font:  silver;
 $color-green: #39b54a;
 $color-blue: #007BFF;
+$color-bg: darken(#fff, 3%); 
+$color-font:    lighten(#000, 20%);
+$color-language-bg: #444;
+$color-modal-bg:  darken($color-bg,20%); 
+$color-modal-font:  darken($color-font, 20%);
 $font-base: Helvetica, sans-serif;
 $font-input: "Lucida Console", Monaco, monospace;
 body {
@@ -39,25 +39,26 @@ nav {
 
     .modal-header{
         border-bottom-color: lighten($color: $color-modal-bg, $amount: 10%);
-        background-color: darken($color: $color-modal-bg, $amount: 5%);
+        //background-color: rbga( darken($color: $color-modal-bg, $amount: 10%), 1 );
+        background-color: transparent;
     }
     .modal-body{
         
         input, textarea, select {
             background-color: $color-bg;
-            color: $color-green; 
             font-family: $font-input; 
-            border: solid 1px lighten($color: $color-modal-bg, $amount: 10%);              
+            border: solid 1px darken($color: $color-modal-bg, $amount: 10%);              
         }
         .input-group-text {
             background-color: $color-modal-bg;
-            color: lighten($color: $color-modal-bg, $amount: 15%);
-            border: solid 1px lighten($color: $color-modal-bg, $amount: 10%);
+            //color: darken($color: $color-modal-bg, $amount: 15%);
+            border: solid 1px darken($color: $color-modal-bg, $amount: 10%);
         }
     }
     .modal-footer{
-        border-top-color: lighten($color: $color-modal-bg, $amount: 10%);
-        background-color: darken($color: $color-modal-bg, $amount: 5%);
+        border-top-color: darken($color: $color-modal-bg, $amount: 20%);
+        //background-color: rbga(darken($color: $color-modal-bg, $amount: 10%), 0.2);
+        background-color: transparent;
         border-radius: 0 0 5px 5px;
     }
 }
