@@ -5,6 +5,7 @@ $color-font:    lighten(#000, 20%);
 $color-language-bg: #444;
 $color-modal-bg:  darken($color-bg,20%); 
 $color-modal-font:  darken($color-font, 20%);
+$color-panel-bg:darken(#fff, 10%);;
 $font-base: Helvetica, sans-serif;
 $font-input: "Lucida Console", Monaco, monospace;
 body {
@@ -60,5 +61,30 @@ nav {
         //background-color: rbga(darken($color: $color-modal-bg, $amount: 10%), 0.2);
         background-color: transparent;
         border-radius: 0 0 5px 5px;
+    }
+}
+
+.users {
+    .panel {
+        padding: 10px;
+        .panel-heading{
+            border-radius: 5px 5px 0 0;
+            padding: 5px;
+            background-color: $color-panel-bg;
+            text-align:center;
+            font-size: 120%;
+            border-bottom: 1px solid darken($color-panel-bg,10%);
+        }
+        .panel-body{
+            background-color: $color-panel-bg;
+            border-radius: 0 0 5px 5px;
+            padding: 5px;
+        }
+        .panel-footer{
+            padding: 5px;
+            background-color: transparent;
+            text-align: center;    
+            
+        }
     }
 }

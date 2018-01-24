@@ -1,48 +1,30 @@
-<div class="container" >
+<div class="container users" >
     <div class="row">
-        <div class="col-sm-12 p-1">
+        <div class="panel col-sm-12 p-1">
             <a href="#" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#adduserModal"><span class="fa fa-plus-square"></span> <?=lang("item_add")?></a>
         </div>
-        <div class="col-sm-12 ml-0 pl-0">
-        <table class="table table-striped table-condesed">
-        <thead>
-        <tr>
-            <th><?=lang("user_title")." ".lang("user_name")." ".lang("user_surname");?></th>
-            <th><?=lang("user_subtitle");?></th>
-            <th><?=lang("user_email");?></th>
-            <th><?=lang("user_tel");?></th>
-            <th><?=lang("user_duty");?></th>
-            <th><?=lang("user_room");?></th>
-            <th><?=lang("user_photo");?></th>
-            <th><?=lang("user_level");?></th>
-            <th></th>
-        </tr>   
-        </thead>
+    </div>
+    <div class="row">    
         <?php foreach( $users as $user ){ ?>
-            <tr>
-                <td><?=$user['title']." ".$user["name"]." ".$user["surname"];?></td>
-                <td><?=$user["subtitle"];?></td>
-                <td><?=$user["email"];?></td>
-                <td><?=$user["tel"];?></td>
-                <td><?=$user["duty"];?></td>
-                <td><?=$user["room"];?></td>
-                <td><?=$user["photo"];?></td>
-                <td><?=$user["level"];?></td>
-                <td class="text-right"><a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
-                    <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
-                </td>
-            </tr>
+            <div class="panel panel-default col-sm-6 col-xs-12">
+                <div class="panel-heading"><?=$user['title']." ".$user['name']." ".$user['surname']?><br /><small><?=$user["subtitle"];?></small></div>
+                <div class="panel-body">
+                    <div><?=lang("user_email");?>: <?=$user["email"];?></div>
+                    <div><?=lang("user_tel");?>: <?=$user["tel"];?></div>
+                    <div><?=lang("user_duty");?>: <?=$user["duty"];?></div>
+                    <div><?=lang("user_room");?>: <?=$user["room"];?></div>
+                    <div><?=lang("user_level");?>: <?=$user["level"];?></div>
+                    <div><?=lang("resume");?>:<br /><?=$user["resume"];?></div>
+                </div>
+                <div class="panel-footer">
+                    <div class="btn-group">
+                        <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
+                        <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
+                    </div>
+                </div>
+            </div>
         <?php } ?>
-        </table>
-        </div>
-        <div class="col-sm-7">
-            <p>
-                <?=$this->session->language;?>
-            </p>
-            <p>
-            <span class="fa fa-users"></span> 
-            </p>
-        </div>
+
     </div>
 </div>
 
@@ -51,7 +33,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="adduserModalLabel"><span class="fa fa-user"></span> <?=lang("new user")?></h5>
+        <h5 class="modal-title" id="adduserModalLabel"><span class="fa fa-user"></span> <?=lang("User")?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

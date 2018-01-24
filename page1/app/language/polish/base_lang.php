@@ -1,6 +1,7 @@
 <?php
 $lang['english'] = 'angielski';
 $lang['Users'] = 'Użytkownicy';
+$lang['User'] = 'Użytkownik';
 $lang['Logout'] = 'Wyloguj';
 $lang['user_title']='Tytuł';
 $lang['user_name']='Imię';

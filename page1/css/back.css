@@ -35,4 +35,22 @@ nav .navbar li .btn-group-vertical {
     background-color: transparent;
     border-radius: 0 0 5px 5px; }
 
+.users .panel {
+  padding: 10px; }
+  .users .panel .panel-heading {
+    border-radius: 5px 5px 0 0;
+    padding: 5px;
+    background-color: #e6e6e6;
+    text-align: center;
+    font-size: 120%;
+    border-bottom: 1px solid #cccccc; }
+  .users .panel .panel-body {
+    background-color: #e6e6e6;
+    border-radius: 0 0 5px 5px;
+    padding: 5px; }
+  .users .panel .panel-footer {
+    padding: 5px;
+    background-color: transparent;
+    text-align: center; }
+
 /*# sourceMappingURL=back.css.map */

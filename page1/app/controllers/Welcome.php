@@ -67,6 +67,7 @@ class Welcome extends CI_Controller {
 		switch( $this->input->post("cmd") ){
 			case "userdelete":
 				$userid = $this->input->post("data");
+				$this->users->delete($userid);
 				$data=array( 'data'=>"User with userid $userid has been deleted.", 'status'=>'OK' );
 				print( json_encode( $data, JSON_UNESCAPED_UNICODE) );
 			break;
@@ -78,6 +79,19 @@ class Welcome extends CI_Controller {
 					$data=array( 'data'=>'No user found', 'status'=>'ERROR' );
 				}
 				print( json_encode( $data, JSON_UNESCAPED_UNICODE) );   
+			break;
+			case "newusersave":
+				$u = json_decode( $this->input->post("data"), true );
+				if( $u==NULL ){
+					print( json_encode( array( 'data'=>"ERROR! no data", 'status'=>'OK' ), JSON_UNESCAPED_UNICODE) );
+					return;
+				}
+				if( $u['userid']>0){
+					$res = $this->users->update($u);
+				}else{
+					$res = $this->users->insert($u);
+				}
+				print( json_encode( array( 'data'=>$res, 'status'=>'OK' ), JSON_UNESCAPED_UNICODE) );
 			break;
 			default:
 				print("Error! no data.");
