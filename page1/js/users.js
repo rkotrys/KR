@@ -33,7 +33,7 @@ $(document).ready(function(){
     /* userdelete */
     $(".userdelete").click(function(){
         var userid = $(this).attr("userid");
-        $.post("/cmd",
+        $.post("/cmd/getuser",
         {
             cmd: "getuser",
             data: userid
@@ -41,7 +41,8 @@ $(document).ready(function(){
         function(data, status){
             /* alert("Data: " + data + "\nStatus: " + status); */
             if( status=='success'){
-               var r = JSON.parse( data );
+               //var r = JSON.parse( data );
+               var r = data;
                if( r['status']=='OK' ){
                     $("#username").html(r['data']['name']+' '+r['data']['surname']); 
                }else{
@@ -83,7 +84,7 @@ $(document).ready(function(){
 
     $(".useredit").click(function(){
         var userid = $(this).attr("userid");
-        $.post("/cmd",
+        $.post("/cmd/getuser",
         {
             cmd: "getuser",
             data: userid
@@ -91,7 +92,8 @@ $(document).ready(function(){
         function(data, status){
             /* alert("Data: " + data + "\nStatus: " + status); */
             if( status=='success'){
-               var r = JSON.parse( data );
+               //var r = JSON.parse( data );
+               var r = data;
                if( r['status']=='OK' ){
                     var u = r['data']; 
                     $("#userid").val(u['userid']);

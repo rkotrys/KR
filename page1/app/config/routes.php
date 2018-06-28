@@ -49,18 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['lang/language/(:any)'] = "welcome/lang/language/$1";
-
-$route['login'] = 'welcome/login';
-$route['login/(:any)'] = 'welcome/login';
-$route['login/(:any)/(:any)'] = 'welcome/login/$1';
-
-$route['cmd'] = 'welcome/cmd';
-$route['cmd/(:any)'] = 'welcome/cmd/$1';
-
-$route['users'] = 'welcome/users';
-$route['users/(:any)'] = 'welcome/users/$1';
-
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['lang/language/(:any)'] = $route['default_controller']."/lang/language/$1";
+
+$route['login'] = $route['default_controller'].'/login';
+$route['login/(:any)'] = $route['default_controller'].'/login';
+$route['login/(:any)/(:any)'] = $route['default_controller'].'/login/$1';
+
+//$route['cmd'] = $route['default_controller'].'/cmd';
+//$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';
+
+$route['users'] = $route['default_controller'].'/users';
+$route['users/(:any)'] = $route['default_controller'].'/users/$1';
+
