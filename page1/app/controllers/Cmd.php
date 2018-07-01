@@ -13,7 +13,6 @@ class Cmd extends CI_Controller {
 		if( $this->session->language == NULL ) 
 			$this->session->set_userdata('language',conf('language'));    
 		$this->lang->load('base', $this->session->language );
-		$this->input->set_cookie('uri', $this->uri->uri_string(), 60*60*24 );
 		$this->load->database();
     }
     

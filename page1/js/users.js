@@ -14,19 +14,16 @@ $(document).ready(function(){
             resume: $("#resume").val(), 
             level: $("#level").val()
         };
-        $.post("/cmd",
-        {
-            cmd: "newusersave",
-            data: JSON.stringify(u)
-        },
+        $.post("/cmd/newuser",
+        {  data: JSON.stringify(u) },
         function(data, status){
             if( status=='success'){
-                var r = JSON.parse( data ); 
-                if( r['status']=='OK' ){
+                // var r = JSON.parse( data ); 
+                if( data['status']=='OK' ){
                     location.reload(); 
                 }
             }
-            alert(data);
+            alert(data['data']);
         });
         $("#adduserModal").modal("hide");
     });
@@ -34,68 +31,49 @@ $(document).ready(function(){
     $(".userdelete").click(function(){
         var userid = $(this).attr("userid");
         $.post("/cmd/getuser",
-        {
-            cmd: "getuser",
-            data: userid
-        },
+        { data: userid },
         function(data, status){
             /* alert("Data: " + data + "\nStatus: " + status); */
             if( status=='success'){
-               //var r = JSON.parse( data );
-               var r = data;
-               if( r['status']=='OK' ){
-                    $("#username").html(r['data']['name']+' '+r['data']['surname']); 
+               if( data['status']=='OK' ){
+                    $("#username").html(data['data']['name']+' '+data['data']['surname']); 
                }else{
-                    $("#deluserModal .modal-body h2").html(r['data']);
+                    $("#deluserModal .modal-body h2").html(data['data']);
                }
             }else{
                 alert('Error! data link failed');
             }
             $("#deluser").click(function(){
-                $.post("/cmd",
-                {
-                    cmd: "userdelete",
-                    data: userid
-                },
+                $.post("/cmd/deleteuser",
+                { data: userid },
                 function(data, status){
                     if( status=='success'){
-                        var r = JSON.parse( data );
-                        if( r['status']=='OK' ){
+                        if( data['status']=='OK' ){
                             $("#deluserModal .modal-body h2").html('OK');
-                            location.reload();          
+                            window.setTimeout(function(){ location.reload(); }, 1000 );
                         }else{
-                            $("#deluserModal .modal-body h2").html(r['data']);
+                            $("#deluserModal .modal-body h2").html(data['data']);
                         }
                      }else{
-                         alert('Error! data link failed');
+                        $("#deluserModal .modal-body h2").html('Error! data link failed');
                      }
-         
-                    $("#deluserModal").modal("hide");
-                    
-                    location.reload(); 
+                    $("#deluserModal").delay(3000).modal("hide");
                 });
             });
             
             $("#deluserModal").modal("show"); 
         });
-        
-
     });
 
     $(".useredit").click(function(){
-        var userid = $(this).attr("userid");
         $.post("/cmd/getuser",
         {
-            cmd: "getuser",
-            data: userid
+            data: $(this).attr("userid")
         },
         function(data, status){
-            /* alert("Data: " + data + "\nStatus: " + status); */
             if( status=='success'){
-               //var r = JSON.parse( data );
-               var r = data;
-               if( r['status']=='OK' ){
-                    var u = r['data']; 
+               if( data['status']=='OK' ){
+                    var u = data['data']; 
                     $("#userid").val(u['userid']);
                     $("#title").val(u['title']);
                     $("#name").val(u['name']);
@@ -113,11 +91,9 @@ $(document).ready(function(){
             }else{
                 alert('Error! data link failed');
             }
-            
             $("#adduserModal").modal("show"); 
         });
-        
-
     });
+
 
 });

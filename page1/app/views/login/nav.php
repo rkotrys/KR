@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
 
   <div class="navbar-header">
-    <a class="navbar-brand" href="#myPage"><?=img("images/logo_KR_blue.png","logo-menu","Logo KR");?></a>
+    <a class="navbar-brand" href="<?=conf('base_url');?>"><?=img("images/logo_KR_blue.png","logo-menu","Logo KR");?></a>
   </div>
 
   <div class="collapse navbar-collapse" id="myNavbar">
