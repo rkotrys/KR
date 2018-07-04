@@ -55,6 +55,13 @@ class Users_model extends CI_Model {
         $query = $this->db->where('userid',$userid)->delete( 'users' );
         return $this->db->affected_rows();
     }
-    
+    public function get_user_by_uname($uname){
+        $query = $this->db->where('uname',$uname)->get('users');
+        if( $query->num_rows()==1 ){
+            return lang_select($query->row_array());
+        }else{
+            return NULL;
+        }
+    }
 
 }

@@ -1,0 +1,57 @@
+
+#modallogin {
+  position: absolute;
+  top: -60px;
+  left: -32rem;
+  z-index: 10000;   
+  background-color: transparent;
+  padding: 10px;
+  text-align: left;
+  border-radius: 5px;
+  display:none;
+}
+#modallogin input[type="text"],
+#modallogin input[type="password"]
+ {
+  background-color: rgba(25,45,45,0.7);  
+  border: 1px solid #39b54a;
+  border-radius: 5px;
+  display: inline;
+  line-height: 1.5erm;
+  height: auto;
+  color: #39b54a;
+  padding: 5px;
+  margin: 0 5px;
+  text-align: center;
+  width: 12rem;
+  font-weight:bold;
+}
+#modallogin input[type="text"]:focus,
+#modallogin input[type="password"]:focus {
+  background-color: #000;
+}
+#modallogin  form {
+   margin:0;
+   padding:5px;
+   width: 130%; 
+   background-color: transparent; 
+   text-align: left;
+   border-radius: 5px; 
+}
+@media only screen and (max-width: 500px) {
+  .home-social {
+    /* display: none; */
+    top: 17rem;
+
+  }
+  #modallogin input[type="text"],
+  #modallogin input[type="password"] {
+    display: block;
+    margin-bottom: 10px;
+    width: 70%;
+  }
+  #modallogin {
+    left: -25rem;
+  }
+
+}

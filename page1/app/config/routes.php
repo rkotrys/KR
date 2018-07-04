@@ -62,6 +62,6 @@ $route['login/(:any)/(:any)'] = $route['default_controller'].'/login/$1';
 //$route['cmd'] = $route['default_controller'].'/cmd';
 //$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';
 
-$route['users'] = $route['default_controller'].'/users';
-$route['users/(:any)'] = $route['default_controller'].'/users/$1';
+//$route['users'] = '/users/index';
+//$route['users/(:any)'] = '/users/$1';
 

@@ -47,6 +47,20 @@ class Cmd extends CI_Controller {
         }
         print( json_encode( array( 'data'=>$res, 'status'=>'OK' ), JSON_UNESCAPED_UNICODE) );
     } 
+    public function ucheck(){
+        $u = $this->users->get_user_by_uname( $this->input->post("uname") );
+        if( is_array($u) ){
+            //if( $u["password"]==md5( $this->input->post("upass") ) )
+            if( $u["pass"]==$this->input->post("upass") )
+                $data=array( 'data'=>$u['uname'], 'status'=>'OK' );
+            else 
+                $data=array( 'data'=>'access denied1', 'status'=>'ERROR' );    
+        }else{
+            $data=array( 'data'=>'access denied2', 'status'=>'ERROR' );
+        }
+        header("Content-Type: application/json; charset=UTF-8");
+        print( json_encode( $data, JSON_UNESCAPED_UNICODE) );    
+    }
     public function index(){
         header("Content-Type: application/json; charset=UTF-8");
         print( json_encode( array( 'data'=>"Error! no data.", 'status'=>'ERROR' ), JSON_UNESCAPED_UNICODE) );

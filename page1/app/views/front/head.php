@@ -23,11 +23,13 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/vendor.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
 
     <!-- script
     ================================================== -->
-    <script src="js/modernizr.js"></script>
-    <script src="js/pace.min.js"></script>
+    <script src="<?=conf("base_url_path")?>js/modernizr.js"></script>
+    <script src="<?=conf("base_url_path")?>js/pace.min.js"></script>
+    <script src="<?=conf("base_url_path")?>js/jquery-3.2.1.min.js"></script>
 
     <!-- favicons
     ================================================== -->

@@ -42,9 +42,21 @@
                 <a href="#didactics"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Dydaktyka</span></a>
             </li>
             <li>
-                <a href="#0"><i class="fa fa-sign-in" aria-hidden="true"></i><span>Logowanie</span></a>
+                <a href="#0" id="loginbt"><i class="fa fa-sign-in" aria-hidden="true" ></i><span>Logowanie</span></a>
+        <!-- login form -->           
+    <div id="modallogin">
+    <form method="post">
+        <input type="text" name="uname" placeholder="<?=lang('User');?>"><input type="password" name="upass" value="" placeholder="<?=lang('Password');?>" >
+    </form>    
+    </div>
+    <script src="<?=conf("base_url_path")?>js/login.js"></script>
+       <!-- end login form -->
+            </li>
+            <li>
+                <a id="langtogle" href="lang/language/<?=($this->session->language=='polish')?"english":"polish";?>"><i class="fa fa-language" aria-hidden="true"></i><span><?=$this->session->language;?></span></a>
             </li>
         </ul> 
         <!-- end home-social -->
 
     </section> <!-- end s-home -->
+    

@@ -1,8 +1,12 @@
 <?php
 $lang['english'] = 'english';
 $lang['Users'] = 'Users';
+$lang['Users_list'] = 'Users List';
 $lang['User'] = 'User';
+$lang['Password']='Password';
 $lang['Logout'] = 'Logout';
+$lang['Login'] ='Login';
+$lang['Username']='User name';
 $lang['user_title']='Title';
 $lang['user_name']='Name';
 $lang['user_surname']='Surname';

@@ -41,7 +41,7 @@ nav .navbar li .btn-group-vertical {
     border-radius: 5px 5px 0 0;
     padding: 5px;
     background-color: #e6e6e6;
-    text-align: center;
+    text-align: left;
     font-size: 120%;
     border-bottom: 1px solid #cccccc; }
   .users .panel .panel-body {

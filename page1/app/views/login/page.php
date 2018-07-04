@@ -6,9 +6,16 @@
     </div>
     <div class="row">    
         <?php foreach( $users as $user ){ ?>
-            <div class="panel panel-default col-sm-6 col-xs-12">
-                <div class="panel-heading"><?=$user['title']." ".$user['name']." ".$user['surname']?><br /><small><?=$user["subtitle"];?></small></div>
-                <div class="panel-body">
+            <div class="panel panel-default col-sm-12 col-xs-12">
+                <div class="panel-heading" data-toggle="collapse" data-target="#user<?=$user["userid"]?>" >
+                <div class="btn-group float-right">    
+                    <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
+                    <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
+                </div>
+                <?=$user['name']." ".$user['surname']?><br />
+                <small><?=$user['level'].", ".$user["subtitle"].", ".$user["title"];?></small>
+                </div>
+                <div class="panel-body panel-collapse collapse" id="user<?=$user["userid"]?>">
                     <div><?=lang("user_email");?>: <?=$user["email"];?></div>
                     <div><?=lang("user_tel");?>: <?=$user["tel"];?></div>
                     <div><?=lang("user_duty");?>: <?=$user["duty"];?></div>
@@ -16,12 +23,7 @@
                     <div><?=lang("user_level");?>: <?=$user["level"];?></div>
                     <div><?=lang("resume");?>:<br /><?=$user["resume"];?></div>
                 </div>
-                <div class="panel-footer">
-                    <div class="btn-group">
-                        <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
-                        <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
-                    </div>
-                </div>
+                <div class="panel-footer"></div>
             </div>
         <?php } ?>
 
@@ -87,10 +89,6 @@
         <div class="form-group">
             <textarea type="text" class="form-control" id="resume" rows="10" placeholder="<?=lang('user_resume')?>" ></textarea>
         </div>
-
-
-
-
         </form>
       </div>
       <div class="modal-footer">
@@ -126,3 +124,4 @@
 
 
 <script src="<?=conf("base_url_path")?>js/users.js"></script>
+

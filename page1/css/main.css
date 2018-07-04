@@ -2111,7 +2111,7 @@ html.no-csstransitions .home-content__main {
         margin: 1.5rem 0 0 0;
     }
     .home-social {
-        right: 4rem;
+        /* right: 4rem; */
     }
     .home-content__scroll {
         right: 7.5rem;
@@ -2168,7 +2168,7 @@ html.no-csstransitions .home-content__main {
         margin: 1.5rem 0 0 0;
     }
     .home-social {
-        display: none;
+        /* display: none; */
     }
 }
 
