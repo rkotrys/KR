@@ -53,11 +53,15 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['lang/language/(:any)'] = $route['default_controller']."/lang/language/$1";
+$route['lang/language/(:any)'] = $route['default_controller'].'/lang/language/$1';
 
 $route['login'] = $route['default_controller'].'/login';
 $route['login/(:any)'] = $route['default_controller'].'/login';
 $route['login/(:any)/(:any)'] = $route['default_controller'].'/login/$1';
+$route['logout'] = $route['default_controller'].'/logout';
+
+$route['user/(:any)'] = 'users/user/$1';
+$route['user/(:any)/(:any)'] = 'users/user/$1/$2';
 
 //$route['cmd'] = $route['default_controller'].'/cmd';
 //$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';

@@ -45,11 +45,31 @@ class Users extends CI_Controller {
 		
 		$this->load->view('login/nav');
 		$this->load->view('login/header', $data);
-		$this->load->view('login/page', $data); 
+		$this->load->view('login/userlist', $data); 
 
 		$this->load->view('login/footer');
 	
     }
-    
+	
+	public function user(){
+		$userid=$this->session->user;
+		$user=$this->users->get_user($userid);
+		if( !isset($user["userid"]) ) redirect("/logout");
+		$data["user"] = $user;
+		$page['title'] = "<span class=\"fa fa-user\"></span> ".$user["name"]." ".$user["surname"].", ".$user["title"];
+		$data["page"] = $page;
+		
+		$data["pages"] = "";
+		$data["menu"] = "";
+		$data["files"] = "";
+		
+		$this->load->view('user/head');
+		$this->load->view('user/nav', $data);
+		$this->load->view('user/header', $data);
+		$this->load->view('user/home', $data); 
+		$this->load->view('user/footer');
+		
+	}
+
 
 }

@@ -51,8 +51,11 @@ class Cmd extends CI_Controller {
         $u = $this->users->get_user_by_uname( $this->input->post("uname") );
         if( is_array($u) ){
             //if( $u["password"]==md5( $this->input->post("upass") ) )
-            if( $u["pass"]==$this->input->post("upass") )
+            if( $u["pass"]==$this->input->post("upass") ){
+                session_regenerate_id();
+                $this->session->set_userdata("user",$u["userid"]);
                 $data=array( 'data'=>$u['uname'], 'status'=>'OK' );
+            }
             else 
                 $data=array( 'data'=>'access denied1', 'status'=>'ERROR' );    
         }else{
