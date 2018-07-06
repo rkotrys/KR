@@ -1,35 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Czas generowania: 05 Lip 2018, 18:59
--- Wersja serwera: 10.1.29-MariaDB
--- Wersja PHP: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Baza danych: `24486348_radio`
---
-CREATE DATABASE IF NOT EXISTS `24486348_radio` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `24486348_radio`;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kr_file`
---
-
+DROP TABLE IF EXISTS `kr_file`;
+DROP TABLE IF EXISTS `kr_menu`;
+DROP TABLE IF EXISTS `kr_page`;
+DROP TABLE IF EXISTS `kr_users`;
 CREATE TABLE IF NOT EXISTS `kr_file` (
   `fid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userid` int(10) UNSIGNED NOT NULL,
@@ -45,12 +23,6 @@ CREATE TABLE IF NOT EXISTS `kr_file` (
   PRIMARY KEY (`fid`),
   KEY `owner` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kr_menu`
---
 
 CREATE TABLE IF NOT EXISTS `kr_menu` (
   `mid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -68,12 +40,6 @@ CREATE TABLE IF NOT EXISTS `kr_menu` (
   KEY `userid` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kr_page`
---
-
 CREATE TABLE IF NOT EXISTS `kr_page` (
   `pid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userid` int(10) UNSIGNED NOT NULL,
@@ -90,12 +56,6 @@ CREATE TABLE IF NOT EXISTS `kr_page` (
   PRIMARY KEY (`pid`),
   KEY `userid` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kr_users`
---
 
 CREATE TABLE IF NOT EXISTS `kr_users` (
   `userid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -116,18 +76,12 @@ CREATE TABLE IF NOT EXISTS `kr_users` (
   `pass` varchar(50) COLLATE utf8_polish_ci NOT NULL DEFAULT '1234',
   `resume_pl` text COLLATE utf8_polish_ci,
   `resume_en` text COLLATE utf8_polish_ci,
-  PRIMARY KEY (`userid`)
+  PRIMARY KEY (`userid`),
+  KEY `uname` (`uname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Zrzut danych tabeli `kr_users`
---
 
 INSERT INTO `kr_users` (`userid`, `name`, `surname`, `title_pl`, `title_en`, `subtitle_pl`, `subtitle_en`, `tel`, `email`, `level`, `duty_pl`, `duty_en`, `photo`, `room`, `uname`, `pass`, `resume_pl`, `resume_en`) VALUES
 (1, 'Robert', 'Kotrys', 'dr inż.', 'Ph.D.', '', '', '+48 612348723', 'robert.kotrys@gmail.com', 'staff', 'Wtorek 9:30 - 11:15', '', NULL, '206', 'rkotrys', '1234', 'Opis osoby ... .', 'Resume ... ...'),
 (2, 'Jan', 'Nowak', 'mgr', 'Msc', 'Asystent', 'Teaching assistant', '12345678', 'jan@wp.pl', 'staff', 'Poniedziałek 11:00 - 12:30', 'Monday 11:15-13:00', NULL, '211', 'jnowak', '1234', 'Opis osoby.', 'Resume ... .');
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+COMMIT;

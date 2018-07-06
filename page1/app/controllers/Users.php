@@ -71,5 +71,25 @@ class Users extends CI_Controller {
 		
 	}
 
+	public function resetdb( $dbfile="" ){
+
+		if( is_file("db/".$dbfile) ){
+		   $query = file_get_contents( "db/".$dbfile );
+		   echo "<p>OK! dbfile '"."db/".$dbfile."' is found.</p>\n";
+		}else{
+			echo "<p>ERROR! dbfile '"."db/".$dbfile."' is NOT found.</p>\n";
+            exit;
+		}   
+		$r = $this->db->query( $query );
+		$error = $this->db->error();
+        echo print_r($error);
+/*		if( $error['code'] ){
+			echo "<p>OK! query success.</p>\n";
+		}else{
+			echo "<p>ERROR! query fail.</p>\n";
+		}
+*/ 
+	}
+
 
 }
