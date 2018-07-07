@@ -68,9 +68,37 @@ class Users extends CI_Controller {
 		$this->load->view('user/header', $data);
 		$this->load->view('user/home', $data); 
 		$this->load->view('user/footer');
-		
 	}
 
+	public function page_edit($pid=NULL){
+		// security
+		$userid=$this->session->user;
+		$user=$this->users->get_user($userid);
+		if( !isset($user["userid"]) ) redirect("/logout");
+		if( $user["level"])
+		//
+        $edit=false;
+		if( $pid ) {
+			$p=$this->service->get_page($pid);
+			$edit=true;
+		}else{
+			$p = new Page;
+		}
+		$data["user"] = $user;
+		$page['title'] = "<span class=\"fa fa-user\"></span> ".$user["name"]." ".$user["surname"].", ".$user["title"];
+		$data["page"] = $page;
+        $data['p'] = $p;
+		$this->load->view('user/head');
+		$this->load->view('user/nav', $data);
+		$this->load->view('user/header', $data);
+		$this->load->view('user/page_edit', $data); 
+		$this->load->view('user/footer');
+
+	}
+
+
+/*-------------------- INSTALL CODE -----------------------*/	
+// TD
 	public function resetdb( $dbfile="" ){
 
 		if( is_file("db/".$dbfile) ){
