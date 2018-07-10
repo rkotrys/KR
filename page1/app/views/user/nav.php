@@ -6,9 +6,9 @@
 
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="#"><?=lang("Front")?></a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#"><?=lang("Pages")?></a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#"><?=lang("Files")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/front/<?=$this->user["uname"]?>"><?=lang("Front")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/pages/<?=$this->user["uname"]?>"><?=lang("Pages")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/files/<?=$this->user["uname"]?>"><?=lang("Files")?></a></li>
       <!--
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle bg-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

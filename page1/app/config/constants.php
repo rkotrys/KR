@@ -86,7 +86,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*-- USER SPACE --*/
 define("LEVEL_GUEST", 0);
-define("LEVEL_USER", 1);
+define("LEVEL_STUDENT", 1);
 define("LEVEL_STAFF", 2);
-define("LEVEL_ADMIN", 3);
+define("LEVEL_OWNER", 3);
+define("LEVEL_ADMIN", 4);
+define("STATUS_PRIVATE", 0);
+define("STATUS_PUBLIC", 1);
 

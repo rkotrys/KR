@@ -13,7 +13,9 @@ class Cmd extends CI_Controller {
 		if( $this->session->language == NULL ) 
 			$this->session->set_userdata('language',conf('language'));    
 		$this->lang->load('base', $this->session->language );
-		$this->load->database();
+        $this->load->database();
+        $this->user=$this->users->get_user($this->session->user);
+		//if( !isset($this->user["userid"]) ) redirect("/logout");
     }
     
     public function deleteuser(){
@@ -63,6 +65,15 @@ class Cmd extends CI_Controller {
         }
         header("Content-Type: application/json; charset=UTF-8");
         print( json_encode( $data, JSON_UNESCAPED_UNICODE) );    
+    }
+    public function deletepage($pid){
+        $p=$this->service->get_page($pid);
+        if( $p->userid==$this->user["userid"] or $this->user["level"]==LEVEL_ADMIN ){
+            $this->service->delete_page($pid);
+                echo "OK";
+            }else{
+                echo "ERROR";
+        }
     }
     public function index(){
         header("Content-Type: application/json; charset=UTF-8");

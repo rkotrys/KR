@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => 'Radio.18',
 	'database' => '24486348_radio',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => 'KR_',
+	'dbprefix' => 'kr_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,

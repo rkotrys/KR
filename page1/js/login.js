@@ -13,7 +13,7 @@ $(document).ready( function(){
             },
             function(data,status){
                 if( data["status"]=="OK") { 
-                    window.location.assign("/user/"+data["data"]);
+                    window.location.assign("/pages/"+data["data"]);
                 }
                 else alert( data["data"] );
             }

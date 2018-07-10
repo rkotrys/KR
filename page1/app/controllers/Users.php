@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends CI_Controller {
+	public $user;
+	public $editor = FALSE;
 
 	/**
 	 * Index Page for this controller.
@@ -17,6 +19,9 @@ class Users extends CI_Controller {
 		$this->lang->load('base', $this->session->language );
 		$this->input->set_cookie('uri', $this->uri->uri_string(), 60*60*24 );
 		$this->load->database();
+		$this->user=$this->users->get_user($this->session->user);
+		if( !isset($this->user["userid"]) ) redirect("/logout");
+
     }
     
     public function index($name = 'guest')
@@ -52,14 +57,11 @@ class Users extends CI_Controller {
     }
 	
 	public function user(){
-		$userid=$this->session->user;
-		$user=$this->users->get_user($userid);
-		if( !isset($user["userid"]) ) redirect("/logout");
-		$data["user"] = $user;
-		$page['title'] = "<span class=\"fa fa-user\"></span> ".$user["name"]." ".$user["surname"].", ".$user["title"];
+		$data["user"] = $this->user;
+		$page['title'] = "<span class=\"fa fa-user\"></span> ".$this->user["name"]." ".$this->user["surname"].", ".$this->user["title"];
 		$data["page"] = $page;
 		
-		$data["pages"] = "";
+		$data["pages"] = $this->page_list();
 		$data["menu"] = "";
 		$data["files"] = "";
 		
@@ -72,20 +74,28 @@ class Users extends CI_Controller {
 
 	public function page_edit($pid=NULL){
 		// security
-		$userid=$this->session->user;
-		$user=$this->users->get_user($userid);
+		$user=$this->user;
+		$this->editor = TRUE;
 		if( !isset($user["userid"]) ) redirect("/logout");
-		if( $user["level"])
-		//
-        $edit=false;
-		if( $pid ) {
-			$p=$this->service->get_page($pid);
-			$edit=true;
-		}else{
-			$p = new Page;
+		$p = ($pid)?$this->service->get_page($pid):(new Page);
+		if( ($p->userid > 0) and ($p->userid != $user["userid"]) ){
+		   if( $p->edr<$user["level"] or $user["level"]<LEVEL_ADMIN){
+				//redirect("/logout");
+		   }
+		}
+		if( $p->userid<1 ) $p->userid=$user["userid"];  
+
+		//$p->content=print_r($p,true);
+		if( isset($_POST["content"]) and $_POST["content"]!="" and $_POST["title"]!=""  ){
+			foreach( $p as $k=>$v) if( isset($_POST[$k]) ) $p->$k=$this->input->post($k); 
+			if( is_numeric($p->pid) ) $this->service->update_page($p);
+			else {
+				$p->pid = $this->service->insert_page($p);
+				redirect( conf('base_url').conf("base_url_path")."/users/page_edit/".$p->pid );
+			}
 		}
 		$data["user"] = $user;
-		$page['title'] = "<span class=\"fa fa-user\"></span> ".$user["name"]." ".$user["surname"].", ".$user["title"];
+		$page['title'] = lang("Edit_page").": ".(isset($p->pid)?"$p->pid":lang("New_page"));
 		$data["page"] = $page;
         $data['p'] = $p;
 		$this->load->view('user/head');
@@ -94,6 +104,72 @@ class Users extends CI_Controller {
 		$this->load->view('user/page_edit', $data); 
 		$this->load->view('user/footer');
 
+	}
+
+	public function front($uname="guset"){
+
+		$data["user"] = $this->user;
+		$page['title'] = lang("Front_menager");
+		$data["page"] = $page;
+
+		$this->load->view('user/head');
+		$this->load->view('user/nav', $data);
+		$this->load->view('user/header', $data);
+		//$this->load->view('user/page_edit', $data); 
+		$this->load->view('user/footer');
+	}
+
+	public function files($uname="gyest"){
+
+		$data["user"] = $this->user;
+		$page['title'] = lang("File_manager");
+		$data["page"] = $page;
+
+		$this->load->view('user/head');
+		$this->load->view('user/nav', $data);
+		$this->load->view('user/header', $data);
+		//$this->load->view('user/page_edit', $data); 
+		$this->load->view('user/footer');
+	}
+
+	public function imgupload(){
+		 
+		$imageFolder = "doc/".$this->user["userid"]."/images/";
+		reset ($_FILES);
+  		$temp = current($_FILES);
+  		if (is_uploaded_file($temp['tmp_name'])){
+    		// Sanitize input
+   			if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
+        		header("HTTP/1.1 400 Invalid file name.");
+        		return;
+    		}
+    		// Verify extension
+    		if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+        		header("HTTP/1.1 400 Invalid extension.");
+        		return;
+    		}
+    		// Accept upload if there was no origin, or if it is an accepted origin
+    		$filetowrite = $imageFolder . $temp['name'];
+    		move_uploaded_file($temp['tmp_name'], $filetowrite);
+
+    		// Respond to the successful upload with JSON.
+    		// Use a location key to specify the path to the saved image resource.
+    		// { location : '/your/uploaded/image/file'}
+    		echo json_encode(array('location' => "/".$filetowrite));
+  		} else {
+    		// Notify editor that the upload failed
+    		header("HTTP/1.1 500 Server Error");
+  		}		
+	}
+
+
+	public function page_list($singleuser=true){
+		$where=" `lang`='".$this->session->language."' ";
+		if( $singleuser or ($this->user["level"]<LEVEL_ADMIN) ) $where .= "AND `userid`='".$this->user["userid"]."' "; 
+		$order = " pid DESC ";
+
+		$pages = $this->service->get_pages( $where, $order );
+        return $pages;
 	}
 
 

@@ -60,8 +60,14 @@ $route['login/(:any)'] = $route['default_controller'].'/login';
 $route['login/(:any)/(:any)'] = $route['default_controller'].'/login/$1';
 $route['logout'] = $route['default_controller'].'/logout';
 
-$route['user/(:any)'] = 'users/user/$1';
-$route['user/(:any)/(:any)'] = 'users/user/$1/$2';
+$route['pages/(:any)'] = 'users/user/$1';
+$route['pages/(:any)/(:any)'] = 'users/user/$1/$2';
+
+$route['front/(:any)'] = 'users/front/$1';
+$route['front/(:any)/(:any)'] = 'users/front/$1/$2';
+
+$route['files/(:any)'] = 'users/files/$1';
+$route['files/(:any)/(:any)'] = 'users/files/$1/$2';
 
 //$route['cmd'] = $route['default_controller'].'/cmd';
 //$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';

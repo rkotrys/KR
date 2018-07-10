@@ -14,15 +14,19 @@
 
     <!-- CSS
     ================================================== -->
-    <!-- <link rel="stylesheet" href="<?=conf("base_url_path")?>css/base.css"> -->
+
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/back.css">
 
     <!-- script
     ================================================== -->
-    <script src="<?=conf("base_url_path")?>js/jquery-3.2.1.min.js"></script>
-    <script src="<?=conf("base_url_path")?>js/bootstrap.min.js"></script>
+    <script src="<?=conf("base_url_path")?>js/jquery-3.2.1.min.js"></script> -->
+    <script src="<?=conf("base_url_path")?>js/bootstrap.min.js" ></script>  -->
+    <?php if($this->editor): ?>
+    <script src="<?=conf("base_url_path")?>js/tinymce/tinymce.min.js"></script>
+    <?php endif ?>
+
     
     
     <!-- favicons
@@ -32,4 +36,4 @@
 
 </head>
 
-<body id="top">
+<body id="top" editlang="<?=($this->session->language=="polish")?"pl":"en_GB";?>" >
