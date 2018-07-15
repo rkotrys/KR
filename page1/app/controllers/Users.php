@@ -119,16 +119,60 @@ class Users extends CI_Controller {
 		$this->load->view('user/footer');
 	}
 
-	public function files($uname="gyest"){
-
+	public function files($uname="guest"){
+		if( $this->input->post("fid")>0 ){
+			// update
+			if( is_object($file=$this->service->get_file($this->input->post("fid")))){
+		    	if( isset($_FILES['userfile']) and is_uploaded_file( $_FILES['userfile']['tmp_name'] ) ){
+					$uploadfile = ".".$file->path;		
+                    if( is_file($uploadfile) ) unlink($uploadfile);
+					move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
+				}
+				$file->alias = $this->input->post("alias");
+				$file->acr = $this->input->post("acr");
+				$file->edr = $this->input->post("edr");
+				$file->status = $this->input->post("status");
+				$file->ackey = $this->input->post("ackey");
+				$this->service->update_file($file);
+				redirect(conf('base_url').conf("base_url_path")."files/".$this->user["uname"]);
+			}
+		}else{
+			// new file
+			if( isset($_FILES['userfile']) and is_uploaded_file( $_FILES['userfile']['tmp_name'] ) ){
+				$uploaddir = "/doc/".$this->user["userid"]."/files/";
+				$fname = basename($_FILES['userfile']['name']);
+				$uploadfile = "." . $uploaddir . $fname;
+				if(is_file($uploadfile)) {
+					$path = pathinfo($fname);
+					$fname = $path["filename"].date("-YmdHis").".".$path["extension"];
+					$uploadfile = "." . $uploaddir . $fname;
+				}	
+  			    $file = new File;
+			    $file->name = $fname;
+				$file->alias = $this->input->post("alias");
+				$file->path = $uploaddir . $fname;
+				$file->userid = $this->user["userid"];
+				$file->acr = $this->input->post("acr");
+				$file->edr = $this->input->post("edr");
+				$file->status = $this->input->post("status");
+				$file->ackey = $this->input->post("ackey");
+				if( !move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile) ){
+					$error = lang("File_upload_error");
+				}else{
+					$this->service->insert_file($file);
+					redirect(conf('base_url').conf("base_url_path")."files/".$this->user["uname"]);
+				}
+		  	}
+		}  
 		$data["user"] = $this->user;
 		$page['title'] = lang("File_manager");
 		$data["page"] = $page;
-
+		$data["files"] = $this->file_list();
+		$data["error"] = (isset($error))?$error:"";
 		$this->load->view('user/head');
 		$this->load->view('user/nav', $data);
 		$this->load->view('user/header', $data);
-		//$this->load->view('user/page_edit', $data); 
+		$this->load->view('user/files', $data); 
 		$this->load->view('user/footer');
 	}
 
@@ -167,9 +211,16 @@ class Users extends CI_Controller {
 		$where=" `lang`='".$this->session->language."' ";
 		if( $singleuser or ($this->user["level"]<LEVEL_ADMIN) ) $where .= "AND `userid`='".$this->user["userid"]."' "; 
 		$order = " pid DESC ";
-
 		$pages = $this->service->get_pages( $where, $order );
         return $pages;
+	}
+
+	public function file_list($where=NULL, $order=NULL, $limit=NULL, $offset=NULL, $singleuser=true){
+		if( $singleuser or ($this->user["level"]<LEVEL_ADMIN) ) $whr = " `userid`='".$this->user["userid"]."' "; 
+		if( $where!=NULL ) $whr .= " AND ".$where;
+		if( $order==NULL ) $order = " name ASC ";
+		$files = $this->service->get_files( $whr, $order, $limit, $offset );
+        return $files;
 	}
 
 

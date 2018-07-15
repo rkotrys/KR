@@ -529,3 +529,5 @@ $config['proxy_ips'] = '';
 |
 */
 $config['base_url_path'] = "/";
+$config['ac_levels'] =  array('Guest','Student','Staff','Owner','Admin');
+$config['item_status'] = array('Private','Public');

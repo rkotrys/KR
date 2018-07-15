@@ -9,7 +9,11 @@
             </div>
         </div>
         <div class="col-sm-4 col-lg-2">
-            <h5><span class="fa fa-user"></span> <?=$user["userid"]." ".$user["name"]." ".$user["surname"].", ".$p->userid?></h5>
+            <?php if( $user["userid"]!=$p->userid ){ 
+                $owner = $this->users->get_user($p->userid);    
+            ?> 
+            <div class="owner-label"><?=$owner["name"]." ".$owner["surname"]?></div>
+            <?php } ?>
             <div class="form-group">
                 <?=lang('Status');?>: <br />
                 <label class="radio-inline"><input type="radio" name="status" value="<?=STATUS_PRIVATE?>" <?=($p->status==STATUS_PRIVATE)?"checked":""?> > <?=lang('Private');?></label>
@@ -74,11 +78,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div id="filelist">
-        f1<br>
-        f2<br>
-        f3<br>
-        </div>
+        <div id="filelist" userid="<?=$user["userid"]?>"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"><?=lang("Close")?></button>

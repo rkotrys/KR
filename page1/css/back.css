@@ -59,5 +59,32 @@ nav .navbar li .btn-group-vertical {
 .panel-body {
   border-top: 1px solid #444;
     padding: 0.5rem;
-  }    
+  } 
+.owner-label {
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}  
+.fileitem {
+  border: 1px solid #333;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 5px;
+  display: inline-block;
+  width: 45%;
+}   
+.fileitem:hover {
+  background-color: #ddd;
+  box-shadow: 3px 3px 3px #000;
+}
+.filelistimg {
+  width:100px;
+  max-width:100px;
+  border:1px solid #ddd;
+  border-radius: 5px;
+  margin:3px;
+  display: inline-block;
+}
+.filelistimg:hover {
+  box-shadow: 3px 3px 3px #000;
+}
 /*# sourceMappingURL=back.css.map */

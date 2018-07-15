@@ -6,6 +6,7 @@
 
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav">
+      <li class="nav-item"><span class="nav-link bg-dark rounded" title="<?=$user["name"]." ".$user["surname"].", ".$user["title"]?>"><span class="fa fa-user"></span> <?=$user["name"]." ".$user["surname"]?></span></li>
       <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/front/<?=$this->user["uname"]?>"><?=lang("Front")?></a></li>
       <li class="nav-item"><a class="nav-link bg-dark rounded" href="/pages/<?=$this->user["uname"]?>"><?=lang("Pages")?></a></li>
       <li class="nav-item"><a class="nav-link bg-dark rounded" href="/files/<?=$this->user["uname"]?>"><?=lang("Files")?></a></li>

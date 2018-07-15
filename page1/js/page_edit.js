@@ -21,16 +21,20 @@ $(document).ready(function(){
         language: editlang,
         browser_spellcheck: true,
         images_upload_url: '/users/imgupload',
+        file_browser_callback_types: 'file image',
+        images_reuse_filename: true,
+        convert_urls: false,
         file_picker_callback: function(callback, value, meta) {
+            var fname;
             // Provide file and text for the link dialog
             if (meta.filetype == 'file') {
-              smodal();  
-              callback('mypage.html', {text: 'My text'});
+
+              fname = smodal(meta.filetype, callback);  
             }
         
             // Provide image and alt text for the image dialog
             if (meta.filetype == 'image') {
-              callback('myimage.jpg', {alt: 'My alt text'});
+                smodal(meta.filetype, callback);  
             }
         
             // Provide alternative source and posted for the media dialog
@@ -41,7 +45,27 @@ $(document).ready(function(){
     });
     
 });
-function smodal(){
-
+function smodal(filetype, callback ){
+    var userid=$("#filelist").attr("userid");
+    if( filetype=="file"){
+        $("#filelist").load("/cmd/get_filelist/file", 
+                            function(){
+                                $(".fileitem").click(function(){
+                                    $("#selectModal").modal("hide");
+                                    callback("/doc/"+userid+"/files/"+$(this).html(),{text:"document",title:$(this).html()});
+                                })
+                            });
+        //$("#filelist").html("xxx");
+    }
+    if( filetype=="image"){
+        $("#filelist").load("/cmd/get_filelist/image", 
+                            function(){
+                                $(".filelistimg").click(function(){
+                                    $("#selectModal").modal("hide");
+                                    callback( $(this).attr("src"),{alt: $(this).attr("title"), title: $(this).attr("title") } );
+                                })
+                            });
+        //$("#filelist").html("xxx");
+    }
     $("#selectModal").modal("show");
 }

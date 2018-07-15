@@ -75,6 +75,54 @@ class Cmd extends CI_Controller {
                 echo "ERROR";
         }
     }
+    public function get_filelist($type="file",$userid=NULL){
+        if( $type=='file'){
+            $id=(is_numeric($userid)?$userid:$this->user["userid"]);
+            $path = "./doc/$id/files";
+            $dir = scandir($path);
+            $d="";
+            foreach($dir as $k=>$v){
+                if( is_file($path."/".$v) ) {
+                    $d.="<button class='btn fileitem'>$v</button>";
+                }
+            }
+            echo $d;
+        }
+        if( $type=='image'){
+            $id=(is_numeric($userid)?$userid:$this->user["userid"]);
+            $path = "./doc/$id/images";
+            $dir = scandir($path);
+            $d="";
+            foreach($dir as $k=>$v){
+                if( is_file($path."/".$v) ) {
+                    $p="/doc/$id/images/$v";
+                    $d.="<img class='filelistimg' alt='$v' title='$v' src='$p' >";
+                }
+            }
+            echo $d;
+        }
+
+    }
+    public function get_file($fid=NULL){
+        if(!is_object($f = $this->service->get_file($fid))) return;
+        if( $f->userid!=$this->user['userid'] and $this->user['level']<$f->edr) return;
+        header("Content-Type: application/json; charset=UTF-8");
+        print( json_encode( $f, JSON_UNESCAPED_UNICODE) );
+    }
+    public function delete_file($fid=NULL){
+        $access=true;
+        $f = $this->service->get_file($fid);
+        if(!isset($f->userid)) $access=false;
+        elseif( $f->userid!=$this->user['userid'] and $this->user['level']<$f->edr) $access=false;
+        if($access){
+           $data = array( 'result'=>$this->service->delete_file($fid), 'status'=>"OK" );
+        }else{
+            $data = array( 'result'=>"Forbiden", 'status'=>"ERROR" );
+        }
+        header("Content-Type: application/json; charset=UTF-8");
+        print( json_encode( $data, JSON_UNESCAPED_UNICODE) );
+    }
+
     public function index(){
         header("Content-Type: application/json; charset=UTF-8");
         print( json_encode( array( 'data'=>"Error! no data.", 'status'=>'ERROR' ), JSON_UNESCAPED_UNICODE) );

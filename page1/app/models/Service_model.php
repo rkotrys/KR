@@ -15,9 +15,22 @@ class Page {
     public function __construct()
     {
         $this->lang = isset($_SESSION["language"])?$_SESSION["language"]:"pl";
-        //$this->userid = isset($_SESSION["user"])?$_SESSION["user"]:0;
     }    
 
+}
+
+class File {
+    public $fid = NULL;
+    public $userid = -1;
+    public $acr = LEVEL_GUEST;
+    public $edr = LEVEL_OWNER;
+    public $status = STATUS_PUBLIC;
+    public $ackey = NULL;
+    public $cdate;
+    public $acdate;
+    public $name = NULL;
+    public $alias;
+    public $path = NULL;
 }
 
 class Service_model extends CI_Model {
@@ -73,4 +86,58 @@ class Service_model extends CI_Model {
         $this->db->where("pid",$pid);
         return $this->db->delete("page");
     }
+
+// ------ FILE ------ //
+    public function insert_file($file){
+        if( $this->db->insert("file", $file) )
+           return $this->db->insert_id();
+        else
+           return FALSE;   
+    }
+
+    public function update_file( $file ){
+        $file->acdate=date("Y-m-d H:i:s");
+        $this->db->where('fid', $file->fid);
+        $query = $this->db->update("file",$file);
+    }
+
+    public function delete_file($fid){
+        $this->db->where("fid",$fid);
+        return $this->db->delete("file");
+    }
+ 
+    public function get_file($fid){
+        $query = $this->db->where("fid",$fid)->get('file');
+        if( $query->num_rows()==1 ){
+            $p = $query->custom_row_object(0,"File");
+            return $p;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function get_file_byname($fname,$userid=NULL){
+        if($userid==NULL) $userid=$this->user["userid"];
+        $query = $this->db->where("name",$fname)->where("userid",$userid)->get('file');
+        if( $query->num_rows()==1 ){
+            $p = $query->custom_row_object(0,"File");
+            return $p;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function get_files($where=NULL,$order=NULL,$limit=NULL,$offset=NULL){
+        $this->db->where($where);
+        $this->db->order_by($order);
+        $query = $this->db->get("file",$limit,$offset);
+        if( $query->num_rows()>0 ){
+            $r = $query->custom_result_object("File");
+            return $r;
+        }else{
+            return NULL;
+        }
+    }
+    
+
 }
