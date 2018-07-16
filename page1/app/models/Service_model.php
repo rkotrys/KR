@@ -12,11 +12,11 @@ class Page {
     public $ackey = NULL;
     public $title = "";
     public $content = "";
+
     public function __construct()
     {
-        $this->lang = isset($_SESSION["language"])?$_SESSION["language"]:"pl";
+        $this->lang = isset($_SESSION["language"])?$_SESSION["language"]:"polish";
     }    
-
 }
 
 class File {
@@ -31,6 +31,25 @@ class File {
     public $name = NULL;
     public $alias;
     public $path = NULL;
+}
+
+class Menu {
+    public $mid = NULL;
+    public $lang = "";
+    public $userid = 0;
+    public $parent = 0;
+    public $position = 0;
+    public $acr = LEVEL_GUEST;
+    public $edr = LEVEL_OWNER;
+    public $status = STATUS_PUBLIC;
+    public $pid = 0;
+    public $type;
+    public $name = "menu item";
+
+    public function __construct()
+    {
+        $this->lang = isset($_SESSION["language"])?$_SESSION["language"]:"polish";
+    }     
 }
 
 class Service_model extends CI_Model {
@@ -138,6 +157,70 @@ class Service_model extends CI_Model {
             return NULL;
         }
     }
+
     
+// ------ MENU ------ //
+public function insert_menu($menu){
+    if( $this->db->insert("menu", $menu) )
+       return $this->db->insert_id();
+    else
+       return FALSE;   
+}
+
+public function update_menu( $menu ){
+    $this->db->where('mid', $menu->mid);
+    $query = $this->db->update("menu",$menu);
+}
+
+public function delete_menu($mid){
+    $this->db->where("mid",$mid);
+    return $this->db->delete("menu");
+}
+
+public function get_menu($mid){
+    $query = $this->db->where("mid",$mid)->get('menu');
+    if( $query->num_rows()==1 ){
+        $p = $query->custom_row_object(0,"Menu");
+        return $p;
+    }else{
+        return NULL;
+    }
+}
+
+public function get_menu_pid($pid,$userid=NULL){
+    if($userid==NULL) $userid=$this->user["userid"];
+    $query = $this->db->where("pid",$pid)->where("userid",$userid)->get('menu');
+    if( $query->num_rows()==1 ){
+        $p = $query->custom_row_object(0,"Menu");
+        return $p;
+    }else{
+        return NULL;
+    }
+}
+
+public function get_menus($where=NULL,$order=NULL,$limit=NULL,$offset=NULL){
+    $this->db->where($where);
+    $this->db->order_by($order);
+    $query = $this->db->get("menu",$limit,$offset);
+    if( $query->num_rows()>0 ){
+        $r = $query->custom_result_object("Menu");
+        return $r;
+    }else{
+        return NULL;
+    }
+}
+
+public function get_usermenu($userid=NULL){
+    if($userid==NULL) $userid=$this->user["userid"];
+    $query = $this->db->where("userid",$userid)->order_by(" parent ASC, position ASC  ")->get('menu');
+    if( $query->num_rows()>0 ){
+        $r = $query->custom_result_object("Menu");
+        return $r;
+    }else{
+        return NULL;
+    }
+}
+
+
 
 }

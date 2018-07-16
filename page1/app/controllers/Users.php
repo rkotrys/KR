@@ -62,7 +62,7 @@ class Users extends CI_Controller {
 		$data["page"] = $page;
 		
 		$data["pages"] = $this->page_list();
-		$data["menu"] = "";
+		$data["menu"] = $this->service->get_usermenu();
 		$data["files"] = "";
 		
 		$this->load->view('user/head');
@@ -204,6 +204,25 @@ class Users extends CI_Controller {
     		// Notify editor that the upload failed
     		header("HTTP/1.1 500 Server Error");
   		}		
+	}
+
+    public function menu_insert($mid=NULL){
+
+		$m = new Menu;
+		if( $this->input->post("name")!="" ){
+			foreach( $m as $k=>$p ){
+				$m->$k = $this->input->post($k);
+			}
+        	if( $this->input->post("mid")>0 ){
+            // update
+     		    $this->service->update_menu($m);
+	    	}else{
+		    // inserrt	
+    		    $m->mid = NULL;
+	    	    $this->service->insert_menu($m);
+		    }
+	    }
+        redirect(conf('base_url').conf("base_url_path")."pages/".$this->user["uname"]);
 	}
 
 
