@@ -11,7 +11,7 @@
 
 <!-- Modal deletemenuitemModal //-->
 <div id="deletefileModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -31,8 +31,8 @@
 </div>
 
 <!-- Modal addmenuitemModal //-->
-<div id="addmenuitemModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div id="addmenuitemModal" class="modal fade " role="dialog">
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -46,14 +46,29 @@
             <label><?=lang("Menu_name")?>:</label>
             <input type="text" name="name" id="menu_name" placeholder="<?=lang("Menu_name")?>" class="form-control"/>
         </div>
-<!--
+        <table class="table">
+        <tr><td style="width:100px;">
+        <div class="checkbox"> 
+           <label><input id="menu_type_page" type="checkbox" name="menu_type_page" value="<?=TYPE_PAGE?>"> <?=lang("Page")?>&nbsp;</label>
+        </div>   
+        <div class="checkbox"> 
+           <labal><input id="menu_type_link" type="checkbox" name="menu_type_link" value="<?=TYPE_LINK?>"> <?=lang("Link")?>&nbsp;</label>
+        </div>
+        </td><td>
+        <div class="form-group"> 
+            <input class="form-control" type="text" name="menu_link" id="ackey" placeholder="<?=lang("Link")?>"/>
+            <input type="hidden" name="menu_pid" value="" />
+            <div id="menu_page_tiitle" pid="" placeholder="<?=lang("Page")?>"></div>
+        </div>
+        </td></tr>
+        </table>
         <table class="table">
         <tr><td style="width:40%;">
-        <div class="custom-control custom-radio custom-control-inline"> 
-           <input class="custom-control-input" id="menu_status1" type="radio" name="menu_status" value="<?=STATUS_PRIVATE?>" checked > <label class="custom-control-label" for="menu_status1"> <?=lang("Private")?>&nbsp;</label>
+        <div class="custom-control custom-radio custom-control-inline"  style="width: 100px;"> 
+           <input class="custom-control-input" id="menu_status0" type="radio" name="menu_status" value="<?=STATUS_PRIVATE?>"> <label class="custom-control-label" for="menu_status0"> <?=lang("Private")?>&nbsp;</label>
         </div>   
-        <div class="custom-control custom-radio custom-control-inline"> 
-           <input class="custom-control-input" id="menu_status1" type="radio" name="menu_status" value="<?=STATUS_PUBLIC?>"> <label class="custom-control-label" for="menu_status2"> <?=lang("Public")?>&nbsp;</label>
+        <div class="custom-control custom-radio custom-control-inline"  style="width: 100px;"> 
+           <input class="custom-control-input" id="menu_status1" type="radio" name="menu_status" value="<?=STATUS_PUBLIC?>"> <label class="custom-control-label" for="menu_status1"> <?=lang("Public")?>&nbsp;</label>
         </div>
         </td><td style="width:30%;">
         <div class="form-group"> 
@@ -78,13 +93,9 @@
         </select>
         </div>
         </td></tr></table>
-        <div>
-        <div class="form-group"> 
-            <label><?=lang("Access_Key")?>:</label>
-            <input class="form-control" type="text" name="ackey" id="ackey" placeholder="<?=lang("Access_Key")?>"/>
-        </div>
+<!--
+//-->
 
--->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary savebutton" ><?=lang("Save")?></button>

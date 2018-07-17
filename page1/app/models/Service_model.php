@@ -89,6 +89,19 @@ class Service_model extends CI_Model {
         }
     }
 
+    public function get_pageselect($where=NULL,$order=NULL,$limit=NULL,$offset=NULL){
+        $this->db->select("pid, title");
+        $this->db->where($where);
+        $this->db->order_by($order);
+        $query = $this->db->get("page",$limit,$offset);
+        if( $query->num_rows()>0 ){
+            $r = $query->custom_result_object("Page");
+            return $r;
+        }else{
+            return NULL;
+        }
+    }
+
     public function insert_page( $page ){
         if( $this->db->insert("page", $page) )
            return $this->db->insert_id();

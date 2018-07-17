@@ -75,6 +75,20 @@ class Cmd extends CI_Controller {
                 echo "ERROR";
         }
     }
+
+    public function pageselect($pid=""){
+       $p = $this->service->get_pageselect("userid='".$this->user["userid"]."' and lang='".$this->session->language."' ", "title ASC");
+       $buf = "<select class='form-control'>";
+       
+       foreach($p as $v){
+           if( $pid>0 and $v->pid==$pid ) $selected = "selected";
+           else $selected = "";
+            $buf .= "<option name='pid' value='".$v->pid."' $selected >".$v->title."</option>";
+       }
+       $buf .= "</select>";
+       echo $buf;
+    }
+
     public function get_filelist($type="file",$userid=NULL){
         if( $type=='file'){
             $id=(is_numeric($userid)?$userid:$this->user["userid"]);
