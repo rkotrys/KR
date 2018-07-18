@@ -43,8 +43,9 @@ class Menu {
     public $edr = LEVEL_OWNER;
     public $status = STATUS_PUBLIC;
     public $pid = 0;
-    public $type;
-    public $name = "menu item";
+    public $type = TYPE_PAGE;
+    public $text = "menu item";
+    public $link = "";
 
     public function __construct()
     {
@@ -225,7 +226,7 @@ public function get_menus($where=NULL,$order=NULL,$limit=NULL,$offset=NULL){
 
 public function get_usermenu($userid=NULL){
     if($userid==NULL) $userid=$this->user["userid"];
-    $query = $this->db->where("userid",$userid)->order_by(" parent ASC, position ASC  ")->get('menu');
+    $query = $this->db->where(" userid='$userid' and lang='".$this->session->language."' ")->order_by(" parent ASC, position ASC  ")->get('menu');
     if( $query->num_rows()>0 ){
         $r = $query->custom_result_object("Menu");
         return $r;

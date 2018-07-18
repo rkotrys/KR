@@ -97,4 +97,19 @@ nav .navbar li .btn-group-vertical {
   text-align: left;
 
 }
+.menuitem-0, .menuitem-1, .menuitem-2, .menuitem-3, .menuitem-4 {
+  width:100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  border-bottom: 1px dotted transparent;
+}
+.menuitem-0:hover, .menuitem-1:hover, .menuitem-2:hover, .menuitem-3:hover, .menuitem-4:hover {
+  border-bottom: 1px dotted #ccc;
+}
+.menuitem-1 {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 5px solid #666;
+}
 /*# sourceMappingURL=back.css.map */

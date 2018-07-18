@@ -209,20 +209,42 @@ class Users extends CI_Controller {
     public function menu_insert($mid=NULL){
 
 		$m = new Menu;
-		if( $this->input->post("name")!="" ){
-			foreach( $m as $k=>$p ){
-				$m->$k = $this->input->post($k);
+		$m->userid=$this->user["userid"];
+		$m->lang=$this->session->language;
+		$m->acr=$this->input->post("menu_acr");
+		$m->edr=$this->input->post("menu_edr");
+		$m->status=$this->input->post("menu_status");
+		$m->text=$this->input->post("menu_text");
+		$par=explode( ":",$this->input->post("menu_parent") );
+		$m->parent=$par[0];
+		$m->position=$par[1];
+		$m->level=$par[2];
+		if( $this->input->post("menu_type_link")==TYPE_LINK ){
+			$m->type=TYPE_LINK;
+			$m->link=$this->input->post("menu_link");
+		}
+		if( $this->input->post("menu_type_page")==TYPE_PAGE ){
+			$m->type=TYPE_PAGE;
+			$m->pid=$this->input->post("menu_pid");
+		}
+		$menu = $this->service->get_menus( "userid='".$this->user["userid"]."' and lang='".$this->session->language."' and parent='".$m->parent."' and position >= '".$m->position."' ", "position ASC" );	
+		if( $menu!=NULL ){
+			foreach($menu as $mu){
+				$mu->position=$mu->position+1;
+				$this->service->update_menu($mu);
 			}
-        	if( $this->input->post("mid")>0 ){
-            // update
-     		    $this->service->update_menu($m);
-	    	}else{
-		    // inserrt	
-    		    $m->mid = NULL;
-	    	    $this->service->insert_menu($m);
-		    }
+		}
+
+		$m->mid=($this->input->post("menu_mid")>0)?$this->input->post("menu_mid"):NULL;
+		if( $m->mid===NULL ){
+            // insert
+			$this->service->insert_menu($m);
+	   	}else{
+			// update
+			$this->service->update_menu($m);
 	    }
-        redirect(conf('base_url').conf("base_url_path")."pages/".$this->user["uname"]);
+		//echo "<pre><code>".print_r($m,true)."</code></pre>";
+		redirect(conf('base_url').conf("base_url_path")."pages/".$this->user["uname"]);
 	}
 
 

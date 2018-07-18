@@ -9,6 +9,7 @@ $(document).ready(function(){
         $("#menu_type_link").prop("checked",false);
         $("input[name='menu_link']").hide();
         $("#menu_page_tiitle").load("/cmd/pageselect/"+$("#menu_page_tiitle").attr("pid"));
+        $("#menu_parentselect").load("/cmd/parentselect");
         $("#addmenuitemModal").modal("toggle");
         event.preventDefault();   
         //alert( "" );
@@ -35,5 +36,8 @@ $(document).ready(function(){
             $("#menu_type_link").prop("checked",true);
         }
     });    
+    $("#menuitemform .savebutton").click(function(){
+        $("#menuitemform").submit();
+    });
    
 });

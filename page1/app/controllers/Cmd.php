@@ -78,15 +78,40 @@ class Cmd extends CI_Controller {
 
     public function pageselect($pid=""){
        $p = $this->service->get_pageselect("userid='".$this->user["userid"]."' and lang='".$this->session->language."' ", "title ASC");
-       $buf = "<select class='form-control'>";
+       $buf = "<select class='form-control' name='menu_pid' >";
        
        foreach($p as $v){
            if( $pid>0 and $v->pid==$pid ) $selected = "selected";
            else $selected = "";
-            $buf .= "<option name='pid' value='".$v->pid."' $selected >".$v->title."</option>";
+            $buf .= "<option value='".$v->pid."' $selected >".$v->title."</option>";
        }
        $buf .= "</select>";
        echo $buf;
+    }
+    public function parentselect(){
+        $m=$this->service->get_menus("lang='".$this->session->language."'and userid='".$this->user["userid"]."' ", "parent ASC, position ASC" );
+        $buf = "<select class='form-control' name='menu_parent'>";
+        $parent=0;
+        $position=0;
+        if(  $m==NULL ){
+            $buf .= "<option value='$parent:$position'>0</option>";
+        }else{
+            $menu=array();
+            foreach($m as $v) $menu[$v->mid]=$v;
+            $level=0;
+            foreach($m as $v){ 
+                if($v->parent==0) $level=0;
+                elseif( $menu[ $v->parent]->parent == 0 ) $level=1;
+                elseif( $menu[ $menu[ $v->parent]->parent ]->parent ==0 ) $level=2;
+                elseif( $menu[ $menu[ $menu[ $v->parent]->parent ]->parent ]->parent == 0 ) $level=3;
+                else $level=4;
+                $pre="";
+                for($n=1;$n<=$level;$n++){ $pre.="--"; }
+                $buf .= "<option value='$v->parent:$v->position:$level'>".(($pre!="")?($pre."> "):"").$v->text."</option>";
+            }
+        }    
+        $buf .= "</select>";
+        echo $buf;
     }
 
     public function get_filelist($type="file",$userid=NULL){

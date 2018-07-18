@@ -1,5 +1,5 @@
 <div class="panel-heading"><?=lang("Pages")?> <div style="font-size:150%;" class="float-right"><a href="/users/page_edit" title=""><span class="fa fa-plus-square"></span></a></div></div>
-<div class="panel-body">
+<div class="panel-body" style="padding:0;">
 <table style="width:100%;" class="table-condensed table-striped table-hover">
 <tr><th><?=lang("Title")?></th><th></th></tr>
     <?php if( is_array($pages) and count($pages)>0 ) { 

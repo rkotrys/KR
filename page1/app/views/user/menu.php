@@ -1,9 +1,18 @@
 <div class="panel-heading">Menu <div style="font-size:150%;" class="float-right"><a id="newmenuitem" href="#" title=""><span class="fa fa-plus-square"></span></a></div></div>
-<div class="panel-body">
+<div class="panel-body" style="padding:0;">
 <?php if( is_array($menu) and count($menu)>0 ): ?>
+<table style="width:100%;" class="table-condensed table-striped table-hover">
+<tr><th><?=lang("Menu_label")?></th><th style="width:50px;"></th></tr>  
 <?php foreach($menu as $m): ?>
-<div class="menuitem-l<?=$m->parent?>"><a href="" ><?=$m->name?></a></div>
+<tr>
+  <td><div class="menuitem-<?=$m->level?>"><?=$m->text?></div></td>
+  <td class="page-tools text-right" style="font-size:150%;">
+    <a href="" title="<?=lang("Edit_menu")?>"><span class="fa fa-edit"></a> 
+    <a class="menu_remove" mid="<?=$m->mid?>" href="#" title="<?=lang("Delete_menu")?>"><span class="fa fa-trash"></a>
+  </td>
+</div>
 <?php endforeach ?>
+</table>
 <?php else: ?>
 <p><?=lang("No_data")?></p>
 <?php endif ?>
@@ -40,11 +49,12 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <form class="form" id="menuitemform" enctype="multipart/form-data" action="/users/menu_insert" method="POST" >
+      <input type="hidden" name="menu_mid" value="" />
       <div class="modal-body">
 
         <div class="form-group"> 
             <label><?=lang("Menu_name")?>:</label>
-            <input type="text" name="name" id="menu_name" placeholder="<?=lang("Menu_name")?>" class="form-control"/>
+            <input type="text" name="menu_text" id="menu_text" placeholder="<?=lang("Menu_name")?>" class="form-control"/>
         </div>
         <table class="table">
         <tr><td style="width:100px;">
@@ -56,12 +66,14 @@
         </div>
         </td><td>
         <div class="form-group"> 
-            <input class="form-control" type="text" name="menu_link" id="ackey" placeholder="<?=lang("Link")?>"/>
-            <input type="hidden" name="menu_pid" value="" />
+            <input class="form-control" type="text" name="menu_link" id="menu_link" placeholder="<?=lang("Link")?>"/>
             <div id="menu_page_tiitle" pid="" placeholder="<?=lang("Page")?>"></div>
         </div>
         </td></tr>
         </table>
+        <table class="table"><tr><td style="width: 100px;text-align:right;"><?=lang("Menu_position")?>: </td><td>
+        <div id="menu_parentselect"></div>
+        </td></tr></table>
         <table class="table">
         <tr><td style="width:40%;">
         <div class="custom-control custom-radio custom-control-inline"  style="width: 100px;"> 

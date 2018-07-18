@@ -92,6 +92,6 @@ define("LEVEL_OWNER", 3);
 define("LEVEL_ADMIN", 4);
 define("STATUS_PRIVATE", 0);
 define("STATUS_PUBLIC", 1);
-define("TYPE_PAGE", 2);
-define("TYPE_LINK", 3);
+define("TYPE_PAGE", 0);
+define("TYPE_LINK", 1);
 
