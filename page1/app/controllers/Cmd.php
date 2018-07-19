@@ -88,18 +88,19 @@ class Cmd extends CI_Controller {
        $buf .= "</select>";
        echo $buf;
     }
-    public function parentselect(){
+    public function parentselect($mid=NULL){
         $m=$this->service->get_menus("lang='".$this->session->language."'and userid='".$this->user["userid"]."' ", "parent ASC, position ASC" );
         $buf = "<select class='form-control' name='menu_parent'>";
+        $buf .= "<option value='0:0:0'>0</option>";
         $parent=0;
         $position=0;
-        if(  $m==NULL ){
-            $buf .= "<option value='$parent:$position'>0</option>";
-        }else{
+        if(  $m!=NULL ){
             $menu=array();
             foreach($m as $v) $menu[$v->mid]=$v;
             $level=0;
             foreach($m as $v){ 
+                if( $mid!=NULL and $mid==$v->mid) $selected="selected";
+                else $selected=""; 
                 if($v->parent==0) $level=0;
                 elseif( $menu[ $v->parent]->parent == 0 ) $level=1;
                 elseif( $menu[ $menu[ $v->parent]->parent ]->parent ==0 ) $level=2;
@@ -107,11 +108,31 @@ class Cmd extends CI_Controller {
                 else $level=4;
                 $pre="";
                 for($n=1;$n<=$level;$n++){ $pre.="--"; }
-                $buf .= "<option value='$v->parent:$v->position:$level'>".(($pre!="")?($pre."> "):"").$v->text."</option>";
+                $buf .= "<option $selected value='$v->parent:$v->position:$level'>".(($pre!="")?($pre."> "):"").$v->text."</option>";
             }
         }    
         $buf .= "</select>";
         echo $buf;
+    }
+    public function get_menuitem($mid){
+        if( !is_numeric($mid) or $mid<1 ) { echo "ERROR"; exit; }
+        $m=$this->service->get_menu($mid);
+        if( !is_object($m) ) { echo "ERROR"; exit; }
+        header("Content-Type: application/json; charset=UTF-8");
+        print( json_encode( $m, JSON_UNESCAPED_UNICODE) );    
+    }
+    public function delete_menu($mid){
+        if( !is_numeric($mid) or $mid<1 ) { echo "ERROR"; exit; }
+        $m=$this->service->get_menu($mid);
+        if( is_object($m) and ($this->user["userid"]==$m->userid or $this->user["level"]==LEVEL_ADMIN or $m->edr>=$this->user["level"]) ){
+            if( $this->service->delete_menu($mid) ){
+                echo "OK";
+            }else{
+                echo "ERROR";
+            }
+        }else{
+            echo "access denied!";
+        }
     }
 
     public function get_filelist($type="file",$userid=NULL){

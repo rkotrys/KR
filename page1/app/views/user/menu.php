@@ -1,13 +1,14 @@
 <div class="panel-heading">Menu <div style="font-size:150%;" class="float-right"><a id="newmenuitem" href="#" title=""><span class="fa fa-plus-square"></span></a></div></div>
 <div class="panel-body" style="padding:0;">
 <?php if( is_array($menu) and count($menu)>0 ): ?>
-<table style="width:100%;" class="table-condensed table-striped table-hover">
+<!--<table style="width:100%;" class="table-condensed table-striped table-hover">-->
+<table class="menu_table" style="width:100%;">
 <tr><th><?=lang("Menu_label")?></th><th style="width:50px;"></th></tr>  
 <?php foreach($menu as $m): ?>
 <tr>
-  <td><div class="menuitem-<?=$m->level?>"><?=$m->text?></div></td>
-  <td class="page-tools text-right" style="font-size:150%;">
-    <a href="" title="<?=lang("Edit_menu")?>"><span class="fa fa-edit"></a> 
+  <td class="menuitem-<?=$m->level?>"><div class="tabmenuitem"><?=$m->text?></div></td>
+  <td class="page-tools text-right" style="font-size:130%;">
+    <a class="menu_edit" mid="<?=$m->mid?>" href="#" title="<?=lang("Edit_menu")?>"><span class="fa fa-edit"></a> 
     <a class="menu_remove" mid="<?=$m->mid?>" href="#" title="<?=lang("Delete_menu")?>"><span class="fa fa-trash"></a>
   </td>
 </div>
@@ -19,7 +20,7 @@
 </div>
 
 <!-- Modal deletemenuitemModal //-->
-<div id="deletefileModal" class="modal fade" role="dialog">
+<div id="deletemenuModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
@@ -28,11 +29,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="deletedfilename"></div>
-        <span class="fa fa-exclamation"></span> <?=lang("Delete_file_statement")?>
+        <div class="deleteitem" ></div>
+        <span class="fa fa-exclamation"></span> <?=lang("Delete_menu_statement")?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary deletefilebutton" ><?=lang("Delete")?></button>
+        <button type="button" class="btn btn-primary deletemenubutton" ><?=lang("Delete")?></button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><?=lang("Close")?></button>
       </div>
     </div>
@@ -49,7 +50,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <form class="form" id="menuitemform" enctype="multipart/form-data" action="/users/menu_insert" method="POST" >
-      <input type="hidden" name="menu_mid" value="" />
+      <input type="hidden" id="menu_mid" name="menu_mid" value="" />
       <div class="modal-body">
 
         <div class="form-group"> 

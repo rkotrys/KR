@@ -227,15 +227,17 @@ class Users extends CI_Controller {
 			$m->type=TYPE_PAGE;
 			$m->pid=$this->input->post("menu_pid");
 		}
-		$menu = $this->service->get_menus( "userid='".$this->user["userid"]."' and lang='".$this->session->language."' and parent='".$m->parent."' and position >= '".$m->position."' ", "position ASC" );	
-		if( $menu!=NULL ){
-			foreach($menu as $mu){
-				$mu->position=$mu->position+1;
-				$this->service->update_menu($mu);
-			}
-		}
 
 		$m->mid=($this->input->post("menu_mid")>0)?$this->input->post("menu_mid"):NULL;
+		
+		$menu = $this->service->get_menus( "userid='".$this->user["userid"]."' and lang='".$this->session->language."' and parent='".$m->parent."' and position >= '".$m->position."' ", "position ASC" );	
+			if( $menu!=NULL ){
+				foreach($menu as $mu){
+					$mu->position=$mu->position+1;
+					$this->service->update_menu($mu);
+				}
+			}
+	
 		if( $m->mid===NULL ){
             // insert
 			$this->service->insert_menu($m);

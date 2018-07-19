@@ -87,7 +87,7 @@ nav .navbar li .btn-group-vertical {
 .filelistimg:hover {
   box-shadow: 3px 3px 3px #000;
 }
-.deletedfilename {
+.deletedfilename, .deleteitem {
   text-align: center;
   font-weight: bold;
   padding: 10px;
@@ -97,19 +97,40 @@ nav .navbar li .btn-group-vertical {
   text-align: left;
 
 }
-.menuitem-0, .menuitem-1, .menuitem-2, .menuitem-3, .menuitem-4 {
+.menu_table {
+  border-collapse: collapse;
+  width: 100%;
+  padding:0;
+  margin:0;
+}
+.menu_table td{
+  padding:0;
+  margin:0;
+  vertical-align: bottom;
+}
+.tabmenuitem {
   width:100%;
-  padding: 0;
+  min-height:30px;
+  padding: 5px 0 0 10px;
   margin: 0;
-  position: relative;
-  border-bottom: 1px dotted transparent;
-}
-.menuitem-0:hover, .menuitem-1:hover, .menuitem-2:hover, .menuitem-3:hover, .menuitem-4:hover {
-  border-bottom: 1px dotted #ccc;
-}
-.menuitem-1 {
-  margin-left: 10px;
-  padding-left: 10px;
   border-left: 5px solid #666;
+  border-bottom: 1px dotted #ccc;
+  font-size: 15px;
+  line-height: 1;
+}
+.tabmenuitem:hover {
+  border-bottom: 1px dotted #666;
+}
+.menu_table td.menuitem-1 {
+  padding-left: 10px;
+}
+.menu_table td.menuitem-2 {
+  padding-left: 20px;
+}
+.menu_table td.menuitem-3 {
+  padding-left: 30px;
+}
+.menu_table td.menuitem-4 {
+  padding-left: 40px;
 }
 /*# sourceMappingURL=back.css.map */
