@@ -56,6 +56,15 @@ $(document).ready(function(){
         event.preventDefault();   
     });
 
+    $(".submenuarrow").click(function(event){
+        console.log("/cmd/menu_submenu/"+$(this).attr("mid")+"/"+$(this).attr("parent"));
+        $.get("/cmd/menu_submenu/"+$(this).attr("mid")+"/"+$(this).attr("parent"),
+          function(data,status){
+             alert($date);
+             if($date=="OK") location.reload();
+        });
+    });
+
     $("#menu_type_link").change(function(){
         if( $("#menu_type_link").prop("checked")==true ){
             $("input[name='menu_link']").val("").show();

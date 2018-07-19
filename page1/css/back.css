@@ -107,6 +107,7 @@ nav .navbar li .btn-group-vertical {
   padding:0;
   margin:0;
   vertical-align: bottom;
+  position: relative;
 }
 .tabmenuitem {
   width:100%;
@@ -132,5 +133,16 @@ nav .navbar li .btn-group-vertical {
 }
 .menu_table td.menuitem-4 {
   padding-left: 40px;
+}
+.submenuarrow {
+   position: absolute;
+   right:0;
+   top:10px;
+   color:#aaa;
+}
+.submenuarrow:hover {
+  color:#333;
+  font-size:130%;
+  top:5px;
 }
 /*# sourceMappingURL=back.css.map */

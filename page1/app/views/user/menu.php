@@ -4,9 +4,13 @@
 <!--<table style="width:100%;" class="table-condensed table-striped table-hover">-->
 <table class="menu_table" style="width:100%;">
 <tr><th><?=lang("Menu_label")?></th><th style="width:50px;"></th></tr>  
-<?php foreach($menu as $m): ?>
+<?php $mu=NULL; foreach($menu as $m): ?>
 <tr>
-  <td class="menuitem-<?=$m->level?>"><div class="tabmenuitem"><?=$m->text?></div></td>
+  <td class="menuitem-<?=$m->level?>"><div class="tabmenuitem"><?=$m->text?></div>
+  <?php if( $mu!=NULL and $m->level<4): ?>
+  <div class="submenuarrow" parent="<?=$mu->mid?>" mid="<?=$m->mid?>"><span class="fa fa-arrow-right" aria-hidden="true"></span></div>
+<?php endif; $mu=$m; ?>
+  </td>
   <td class="page-tools text-right" style="font-size:130%;">
     <a class="menu_edit" mid="<?=$m->mid?>" href="#" title="<?=lang("Edit_menu")?>"><span class="fa fa-edit"></a> 
     <a class="menu_remove" mid="<?=$m->mid?>" href="#" title="<?=lang("Delete_menu")?>"><span class="fa fa-trash"></a>

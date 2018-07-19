@@ -89,7 +89,7 @@ class Cmd extends CI_Controller {
        echo $buf;
     }
     public function parentselect($mid=NULL){
-        $m=$this->service->get_menus("lang='".$this->session->language."'and userid='".$this->user["userid"]."' ", "parent ASC, position ASC" );
+        $m=$this->service->get_usermenu();
         $buf = "<select class='form-control' name='menu_parent'>";
         $buf .= "<option value='0:0:0'>0</option>";
         $parent=0;
@@ -132,6 +132,24 @@ class Cmd extends CI_Controller {
             }
         }else{
             echo "access denied!";
+        }
+    }
+    public function menu_submenu($mid=NULL,$parent=NULL){
+        $crnt = $this->service->get_menu($mid);
+        if( $crnt->level<4 ){
+            if( $sm = $this->service->get_smb($crnt->level,$crnt->parent,$crnt->position+1) ){
+                foreach($sm as $m){
+                    $m->position=$m->position-1;
+                    $this->service->update_menu($m);
+                }
+            }
+            $crnt->level=$crnt->level+1;
+            $crnt->parent=$parent;
+            $crnt->position=0;
+            $this->service->update_menu($crnt);
+            echo "OK";
+        }else{
+            echo "ERROR";
         }
     }
 
