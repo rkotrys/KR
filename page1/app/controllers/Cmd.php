@@ -91,7 +91,7 @@ class Cmd extends CI_Controller {
     public function parentselect($mid=NULL){
         $m=$this->service->get_usermenu();
         $buf = "<select class='form-control' name='menu_parent'>";
-        $buf .= "<option value='0:0:0'>0</option>";
+        $buf .= "<option value='-1:-1:-1'>0</option>";
         $parent=0;
         $position=0;
         if(  $m!=NULL ){
@@ -101,14 +101,9 @@ class Cmd extends CI_Controller {
             foreach($m as $v){ 
                 if( $mid!=NULL and $mid==$v->mid) $selected="selected";
                 else $selected=""; 
-                if($v->parent==0) $level=0;
-                elseif( $menu[ $v->parent]->parent == 0 ) $level=1;
-                elseif( $menu[ $menu[ $v->parent]->parent ]->parent ==0 ) $level=2;
-                elseif( $menu[ $menu[ $menu[ $v->parent]->parent ]->parent ]->parent == 0 ) $level=3;
-                else $level=4;
                 $pre="";
-                for($n=1;$n<=$level;$n++){ $pre.="--"; }
-                $buf .= "<option $selected value='$v->parent:$v->position:$level'>".(($pre!="")?($pre."> "):"").$v->text."</option>";
+                for($n=1;$n<=$v->level;$n++){ $pre.="--"; }
+                $buf .= "<option $selected value='$v->parent:$v->position:$v->level'>".(($pre!="")?($pre."> "):"").$v->text."</option>";
             }
         }    
         $buf .= "</select>";

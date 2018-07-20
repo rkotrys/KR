@@ -58,11 +58,12 @@ $(document).ready(function(){
 
     $(".submenuarrow").click(function(event){
         console.log("/cmd/menu_submenu/"+$(this).attr("mid")+"/"+$(this).attr("parent"));
+        
         $.get("/cmd/menu_submenu/"+$(this).attr("mid")+"/"+$(this).attr("parent"),
           function(data,status){
-             alert($date);
-             if($date=="OK") location.reload();
+             if(data=="OK") location.reload();
         });
+        
     });
 
     $("#menu_type_link").change(function(){

@@ -208,17 +208,19 @@ class Users extends CI_Controller {
 
     public function menu_insert($mid=NULL){
 
-		$m = new Menu;
+		$mid=($this->input->post("menu_mid")>0)?$this->input->post("menu_mid"):NULL;
+		if($mid!==NULL) {
+			$m = $m_old = $this->service->get_menu($mid);
+			$this->service->delete_menuitem($m->mid);
+		}else{
+			$m = new Menu;
+		}	
 		$m->userid=$this->user["userid"];
 		$m->lang=$this->session->language;
 		$m->acr=$this->input->post("menu_acr");
 		$m->edr=$this->input->post("menu_edr");
 		$m->status=$this->input->post("menu_status");
 		$m->text=$this->input->post("menu_text");
-		$par=explode( ":",$this->input->post("menu_parent") );
-		$m->parent=$par[0];
-		$m->position=$par[1];
-		$m->level=$par[2];
 		if( $this->input->post("menu_type_link")==TYPE_LINK ){
 			$m->type=TYPE_LINK;
 			$m->link=$this->input->post("menu_link");
@@ -227,24 +229,36 @@ class Users extends CI_Controller {
 			$m->type=TYPE_PAGE;
 			$m->pid=$this->input->post("menu_pid");
 		}
-
-		$m->mid=($this->input->post("menu_mid")>0)?$this->input->post("menu_mid"):NULL;
-		
-		$menu = $this->service->get_menus( "userid='".$this->user["userid"]."' and lang='".$this->session->language."' and parent='".$m->parent."' and position >= '".$m->position."' ", "position ASC" );	
-			if( $menu!=NULL ){
-				foreach($menu as $mu){
-					$mu->position=$mu->position+1;
-					$this->service->update_menu($mu);
+		$par=explode( ":",$this->input->post("menu_parent") );
+		$m->parent=$par[0];
+		$m->position=$par[1];
+		$m->level=$par[2];
+		if( $level0 = $this->service->get_smb(0) ){
+			if( $m->parent==-1 and $m->position==-1 ){
+				$m->position = count($level0);
+				$m->level = 0;
+				$m->parent = 0;
+			}else{
+				//$m->position += 1;	
+				$menu = $this->service->get_smb($m->level, $m->parent);
+				if( $menu!==NULL ){
+					$p=0;
+					foreach($menu as $mu){
+						if( $m->position==$p) $p++;
+						$mu->position=$p;
+						$this->service->update_menu($mu);
+						$p++;
+					}
 				}
 			}
-	
-		if( $m->mid===NULL ){
-            // insert
-			$this->service->insert_menu($m);
-	   	}else{
-			// update
-			$this->service->update_menu($m);
-	    }
+		}else{
+			$m->parent=0;
+			$m->position=0;
+			$m->level=0;
+		}
+        // insert
+		$this->service->insert_menu($m);
+
 		//echo "<pre><code>".print_r($m,true)."</code></pre>";
 		redirect(conf('base_url').conf("base_url_path")."pages/".$this->user["uname"]);
 	}

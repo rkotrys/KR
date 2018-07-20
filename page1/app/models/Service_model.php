@@ -186,9 +186,34 @@ public function update_menu( $menu ){
     $query = $this->db->update("menu",$menu);
 }
 
+public function delete_menuitem($mid){
+    if( !$m = $this->get_menu($mid) ) return NULL;
+    if( !($m->userid==$this->user["userid"] or $m->edr<$this->user["level"] or $this->user["level"]==LEVEL_ADMIN) ) return NULL;
+    return $this->db->where("mid",$mid)->delete("menu");
+    if( $smb = $this->get_smb($m->level,$m->parent,$m->position)){
+        foreach($smb as $mu){
+            $mu->position--;
+            $this->update_menu($mu);
+        }
+    }
+
+}
 public function delete_menu($mid){
-    $this->db->where("mid",$mid);
-    return $this->db->delete("menu");
+    if( !$m = $this->get_menu($mid) ) return NULL;
+    if( !($m->userid==$this->user["userid"] or $m->edr<$this->user["level"] or $this->user["level"]==LEVEL_ADMIN) ) return NULL;
+    $this->db->where("mid",$mid)->delete("menu");
+    if( $smb = $this->get_smb($m->level,$m->parent,$m->position)){
+        foreach($smb as $mu){
+            $mu->position--;
+            $this->update_menu($mu);
+        }
+    }
+    if( $dm = $this->get_smb($m->level+1,$m->mid) ){
+        foreach($md as $mu){
+            $this->delete_menu($mu->mid);
+        }
+    }
+    return TRUE;
 }
 
 public function get_menu($mid){
