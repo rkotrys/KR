@@ -11,10 +11,12 @@ body {
     background-color: #444; }
 
 .page-header {
-  padding-bottom: 0;
-  margin-bottom: 0; }
+  padding: 10px 0;
+  margin: 0; }
   .page-header h1 {
-    font-size: 24px;
+    font-size: 18px;
+    margin:0;
+    padding:0;
   }
 
 nav .navbar li .btn-group-vertical {
@@ -145,4 +147,52 @@ nav .navbar li .btn-group-vertical {
   font-size:130%;
   top:5px;
 }
+.staff-card .panel-heading {
+  border: none;
+  background-color: #eee;
+    border-radius: 5px 5px 0 0;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.staff-card .panel-body {
+  border: none;
+  background-color: #eee;
+  border-radius: 0;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.staff-card .panel-body-text {
+  text-align: left;
+  margin-left: 110px;
+}
+.staff-card .panel-body-text p {
+  font-weight: bold;
+  padding:0;
+  margin:0;
+}
+.staff-card .panel-body-text p span {
+  font-style: italic;
+  font-weight: normal;
+}
+.staff-card .panel-body img {
+  width:100px;
+  border-radius: 5px;
+  float: left;
+  margin-right: 5px;
+}
+.staff-card .panel-footer {
+  border: none;
+  background-color: #eee;
+  border-radius: 0 0 5px 5px;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.staff-card .panel-heading {
+  padding: 3px 3px 3px 10px;
+  font-weight: bold;
+  border-bottom: 2px solid #666;
+}
+
 /*# sourceMappingURL=back.css.map */

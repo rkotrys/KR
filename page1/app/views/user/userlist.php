@@ -77,11 +77,11 @@
                 <span class="input-group-text"><?=lang('user_level')?></span> 
             </div>
             <select class="form-control" id="level" name="level">
-                <option value="blocked"><?=lang('blocked')?></option>
-                <option value="guest"><?=lang('guest')?></option>
-                <option value="student"><?=lang('student')?></option>
-                <option value="staff"><?=lang('staff')?></option>
-                <option value="editor"><?=lang('editor')?></option>
+                <?php $levels=conf("ac_levels"); foreach(conf("ac_levels") as $k=>$v): ?>
+                <?php if( $v!="Owner"): ?>
+                <option value="<?=$k?>"><?=lang($v)?></option>
+                <?php endif ?>
+                <?php endforeach ?>
             </select>
         </div>
         </div>

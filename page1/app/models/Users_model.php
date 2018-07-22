@@ -63,5 +63,12 @@ class Users_model extends CI_Model {
             return NULL;
         }
     }
+    public function get_stafflist(){
+        $query=$this->db->where("level>=",LEVEL_STAFF)->order_by("surname ASC")->get("users");
+        foreach( $query->result_array() as $row ){
+            $users[$row['userid']] = lang_select($row);
+        }
+        return $users;
+    }
 
 }

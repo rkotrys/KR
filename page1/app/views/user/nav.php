@@ -6,23 +6,24 @@
 
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item"><span class="nav-link bg-dark rounded" title="<?=$user["name"]." ".$user["surname"].", ".$user["title"]?>"><span class="fa fa-user"></span> <?=$user["name"]." ".$user["surname"]?></span></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/front/<?=$this->user["uname"]?>"><?=lang("Front")?></a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/pages/<?=$this->user["uname"]?>"><?=lang("Pages")?></a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/files/<?=$this->user["uname"]?>"><?=lang("Files")?></a></li>
-      <!--
+    <?php if($this->user["level"]==LEVEL_ADMIN): ?>
+    <li class="nav-item"><span class="nav-link bg-dark rounded" title=" ".<?=$this->user["name"]?>." ".<?=$this->user["surname"]?>.", ".<?=$this->user["title"]?>"><span class="fa fa-user"></span> <?=$this->user["name"]." ".$this->user["surname"]?></span></li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle bg-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="/users/list"><?=lang("Users_list")?></a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      //-->
+      <?php endif ?>
+      
+      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/pub?>"><?=lang("Front")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/pages/<?=$this->user["uname"]?>"><?=lang("Pages")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/files/<?=$this->user["uname"]?>"><?=lang("Files")?></a></li>
     </ul>
   </div>
 

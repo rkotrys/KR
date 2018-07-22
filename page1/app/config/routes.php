@@ -69,6 +69,9 @@ $route['front/(:any)/(:any)'] = 'users/front/$1/$2';
 $route['files/(:any)'] = 'users/files/$1';
 $route['files/(:any)/(:any)'] = 'users/files/$1/$2';
 
+$route['public/(:any)'] = 'pub/index/$1';
+$route['public/(:any)/(:any)'] = 'pub/index/$1/$2';
+
 //$route['cmd'] = $route['default_controller'].'/cmd';
 //$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';
 

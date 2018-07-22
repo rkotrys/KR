@@ -20,7 +20,7 @@ class Users extends CI_Controller {
 		$this->input->set_cookie('uri', $this->uri->uri_string(), 60*60*24 );
 		$this->load->database();
 		$this->user=$this->users->get_user($this->session->user);
-		if( !isset($this->user["userid"]) ) redirect("/logout");
+		if( !isset($this->user["userid"]) or $this->user["level"]<LEVEL_STAFF ) redirect("/logout");
 
     }
     
@@ -46,19 +46,19 @@ class Users extends CI_Controller {
 		$page['title']= "<span class=\"fa fa-user\"></span> ".lang('Users');
 		$data['page'] = $page;
 		$data['users'] = $users;
-		$this->load->view('login/head');
+		$this->load->view('user/head');
 		
-		$this->load->view('login/nav');
-		$this->load->view('login/header', $data);
-		$this->load->view('login/userlist', $data); 
+		$this->load->view('user/nav');
+		$this->load->view('user/header', $data);
+		$this->load->view('user/userlist', $data); 
 
-		$this->load->view('login/footer');
+		$this->load->view('user/footer');
 	
     }
 	
 	public function user(){
 		$data["user"] = $this->user;
-		$page['title'] = "<span class=\"fa fa-user\"></span> ".$this->user["name"]." ".$this->user["surname"].", ".$this->user["title"];
+		$page['title'] = "<span class=\"fa fa-user\"></span> ".lang("Users_content_manager");
 		$data["page"] = $page;
 		
 		$data["pages"] = $this->page_list();
@@ -165,7 +165,7 @@ class Users extends CI_Controller {
 		  	}
 		}  
 		$data["user"] = $this->user;
-		$page['title'] = lang("File_manager");
+		$page['title'] = "<span class=\"fa fa-file\"></span> ".lang("File_manager");
 		$data["page"] = $page;
 		$data["files"] = $this->file_list();
 		$data["error"] = (isset($error))?$error:"";

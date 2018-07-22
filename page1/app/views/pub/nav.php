@@ -6,9 +6,13 @@
 
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="#"><span class="fa fa-user"></span>  <?=($this->user["uname"]=='guest')?lang("guest_user"):$this->user["title"]." ".$this->user["name"]." ".$this->user["surname"]?></a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#">HOME 2</a></li>
-      <li class="nav-item"><a class="nav-link bg-dark rounded" href="#">HOME 3</a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="#"><span class="fa fa-user"></span>  <?=($this->user["uname"]=='guest')?lang("guest_user"):$this->user["name"]." ".$this->user["surname"].", ".$this->user["title"]?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="/"><?=lang("WCS")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="http://et.put.poznan.pl"><?=lang("FET")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded" href="https://put.poznan.pl"><?=lang("PUT")?></a></li>
+      
+      
+      <!--
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle bg-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
@@ -20,7 +24,7 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      
+      -->
     </ul>
   </div>
 
