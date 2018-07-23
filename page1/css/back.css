@@ -188,6 +188,7 @@ nav .navbar li .btn-group-vertical {
   border-bottom: 1px solid #ccc;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+  padding:5px;;
 }
 .staff-card .panel-heading {
   padding: 3px 3px 3px 10px;

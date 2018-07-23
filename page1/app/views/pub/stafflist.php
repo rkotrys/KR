@@ -9,13 +9,13 @@
             <img src="/images/staff/<?=(is_file("/images/staff/".$staff['photo']))?$staff['photo']:"profile-default-male.png"?>" alt="<?=$username?>" title="<?=$username?>" />
             <div class="panel-body-text">
                 <p><span><?=lang("user_room")?></span>: <?=$staff["room"]?></p>
-                <p><span><?=lang("user_duty")?></span>: <?=$staff["duty"]?></p>
                 <p><span>Tel.</span>: <?=$staff["tel"]?></p>
-                <p><span>e-mail</span>: <?=$staff["email"]?></p>
             </div>
+            <div class="clearfix"></div>
             </div>
             <div class="panel-footer">
-                &nbsp;
+            <span>e-mail</span>: <?=$staff["email"]?><br />
+            <span><?=lang("user_duty")?></span>: <?=$staff["duty"]?>
             </div>
         </panel>
         </div>
