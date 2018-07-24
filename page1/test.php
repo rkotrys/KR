@@ -13,29 +13,52 @@
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js" ></script>
-    <script src='js/tinymce/tinymce.min.js'></script>
+	<script src="js/simpleUpload.min.js" ></script>
 
 </head>
 <body>
 <h1>Test</h1>
+<hr />
+<div id="myimg"></div>
+<hr />
 <form style="text-align:center;width:100%;">
-<p>Edit</p>
-<textarea id="content" name="content" style="width:90%;height: 500px;">test str</textarea>
+<p>Upload</p>
+<input type="file" name="myfile" id="myfile" />
 </form>
 <script>
+// http://simpleupload.michaelcbrook.com/
+$(document).ready(function(){
 
-    tinymce.init({
-        selector: 'textarea#content',
-        plugins: 'advlist, image, charmap, preview, anchor, imagetools, code, media, link, lists, colorpicker, paste, table, textcolor, save, colorpicker contextmenu',
-        toolbar: 'save undo redo formats styleselect bold italic fontsizeselect forecolor backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent code codesample link image',
-        skin: 'lightgray',
-        height: 500,
-        auto_focus: 'main',
-        branding: false,
-        paste_data_images: true,
-        images_upload_url: 'upload.php'
-    });
+	$('input[type=file]').change(function(){
 
+		$(this).simpleUpload("/ajax/upload.php", {
+
+			start: function(file){
+				//upload started
+				console.log("upload started");
+			},
+
+			progress: function(progress){
+				//received progress
+				console.log("upload progress: " + Math.round(progress) + "%");
+			},
+
+			success: function(data){
+				//upload successful
+				console.log("upload successful!");
+				console.log(data);
+			},
+
+			error: function(error){
+				//upload failed
+				console.log("upload error: " + error.name + ": " + error.message);
+			}
+
+		});
+
+	});
+
+});
 </script>
 </body>
 </html>
