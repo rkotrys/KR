@@ -1,6 +1,7 @@
 body {
-  background-color: #f7f7f7;
-  color: #333333; }
+  background-color: #fff;
+  color: #333333; 
+}
 
 .logo-menu {
   width: 100px; }
@@ -147,53 +148,54 @@ nav .navbar li .btn-group-vertical {
   font-size:130%;
   top:5px;
 }
-.staff-card .panel-heading {
+
+.stafflist .staff-card {
+  margin: 0;
+  padding:10px;
+  text-shadow: 1px 1px 1px #fff;
+  
+}  
+.staff-card .panel-heading,
+.staff-card .panel-body,
+.staff-card .panel-footer  {
+  background-color: rgba(240,250,240,80%);
+  padding: 5px;
   border: none;
-  background-color: #eee;
-    border-radius: 5px 5px 0 0;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
 }
-.staff-card .panel-body {
-  border: none;
-  background-color: #eee;
-  border-radius: 0;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+.staff-card .panel-heading {
+  border-radius: 5px 5px 0 0;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 110%;
+  border-bottom: 4px solid #aaa;
 }
 .staff-card .panel-body-text {
   text-align: left;
   margin-left: 110px;
 }
-.staff-card .panel-body-text p {
+.staff-card .panel-body-text p,
+.staff-card .panel-footer p {
   font-weight: bold;
   padding:0;
   margin:0;
+  line-height: 24px;
 }
-.staff-card .panel-body-text p span {
+.staff-card .panel-body-text p span,
+.staff-card .panel-footer p span {
   font-style: italic;
   font-weight: normal;
 }
 .staff-card .panel-body img {
-  width:100px;
+  height: 136px;
+  width: 100px;
   border-radius: 5px;
   float: left;
   margin-right: 5px;
 }
 .staff-card .panel-footer {
   border: none;
-  background-color: #eee;
   border-radius: 0 0 5px 5px;
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  padding:5px;;
-}
-.staff-card .panel-heading {
-  padding: 3px 3px 3px 10px;
-  font-weight: bold;
-  border-bottom: 2px solid #666;
+  text-align: center;
 }
 
 /*# sourceMappingURL=back.css.map */

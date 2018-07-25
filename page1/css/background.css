@@ -1,0 +1,8 @@
+body {
+    background-color: black;
+    background: url('/images/back01.png') no-repeat center fixed;  
+    /*no-repeat center fixed;*/
+    background-size: cover;
+    color: #333333; 
+  }
+   

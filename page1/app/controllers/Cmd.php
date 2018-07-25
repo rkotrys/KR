@@ -148,6 +148,30 @@ class Cmd extends CI_Controller {
         }
     }
 
+    // Upload the user photo
+    public function phupload($userid=NULL){
+        $imageFolder = "doc/".$this->user["userid"]."/images/";
+        if( isset($_FILES["photo"]) and is_uploaded_file( $_FILES["photo"]["tmp_name"] )  ){
+            $ext = pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION);
+            if($userid==NULL){
+                $phname = $this->user["name"]."_".$this->user["surname"].".".$ext;
+            }else{
+                $u = $this->users->get_user($userid);
+                $phname = $u["name"]."_".$u["surname"].".".$ext;
+            }
+            move_uploaded_file ( $_FILES["photo"]["tmp_name"], $imageFolder.$phname );  
+            $success=true;
+        }else $success=false;
+        // $output will be converted into JSON
+        if ($success) {
+	        $output = array("success" => true, "message" => "Success!", "name"=>$imageFolder.$phname );
+        } else {
+	        $output = array("success" => false, "error" => "Failure!");
+        }
+        header("Content-Type: application/json; charset=utf-8");
+        echo json_encode($output);
+    }
+
     public function get_filelist($type="file",$userid=NULL){
         if( $type=='file'){
             $id=(is_numeric($userid)?$userid:$this->user["userid"]);

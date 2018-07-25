@@ -1,4 +1,37 @@
 $(document).ready(function(){
+
+    $("#photo").change(function(){
+        if( $("#userid").val()>0 ){
+            var url="/cmd/phupload/"+$("#userid").val();
+        }else{
+            var url="/cmd/phupload";
+        }
+		$(this).simpleUpload(url, {
+            name: "photo",
+            expect: "json",
+            allowedExts: ["jpg", "jpeg", "png", "gif"],
+			start: function(file){
+				//upload started
+				console.log("upload started: "+file.name);
+			},
+			success: function(data){
+                //upload successful
+                $("#userphoto").attr("src","/"+data.name);
+                $("#userphoto_path").val(data.name);
+				console.log("upload successful! name:"+data.name);
+				console.log(data);
+			},
+			error: function(error){
+				//upload failed
+				console.log("upload error: " + error.name + ": " + error.message);
+			}
+		});
+	});
+    $("#phupload").click(function(){
+        console.log("Upload start");
+        $("#photo").click();
+    })
+
     /* newusersave */
     $("#newusersave").click(function(){
         var u = {
@@ -12,6 +45,8 @@ $(document).ready(function(){
             duty: $("#duty").val(),
             subtitle: $("#subtitle").val(),
             resume: $("#resume").val(), 
+            status: $("#status").val(),
+            photo: $("#userphoto_path").val(),
             level: $("#level").val()
         };
         $.post("/cmd/newuser",
@@ -85,6 +120,8 @@ $(document).ready(function(){
                     $("#subtitle").val(u['subtitle']); 
                     $("#resume").html(u['resume']); 
                     $("#level [value='"+u['level']+"']").attr("selected", ""); 
+                    $("#userphoto").attr("src","/"+u.photo);
+                    $("#userphoto_path").val(u.photo);
                }else{
                 alert('Error! user data not found');
                }

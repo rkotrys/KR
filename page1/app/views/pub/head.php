@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=conf("base_url_path")?>css/back.css">
+    <link rel="stylesheet" href="<?=conf("base_url_path")?>css/background.css">
 
     <!-- script
     ================================================== -->
