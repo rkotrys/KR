@@ -23,13 +23,42 @@ class Pub extends CI_Controller {
 		}
     }
     
-    public function index()
+    public function index($name=NULL,$pid=NULL)
 	{
 		$page['title']= "<span class=\"fa fa-users\"></span> ".lang('Staff');
-		$data['page'] = $page;
 		$data['stafflist'] = $this->users->get_stafflist();
 
-        $this->load->view('pub/head');
+		if($name!=NULL){
+			$r=explode("-",$name);
+			$surname = (isset($r[0])?$r[0]:NULL);
+			$name = (isset($r[1])?$r[1]:NULL);
+			if( $name!="" ) $u=$this->users->get_user_by_surname($surname,$name);
+			else $u=$this->users->get_user_by_surname($surname);
+			if( $u ){
+				// user page
+
+				$page['title']=lang("User_biography");
+				$page["content"]=$u['resume'];
+				$p=false;
+				if( ($pid != NULL) and ($p = $this->service->get_page($pid)) ){
+					$page['title']=$p->title;
+					$page["content"]=$p->content;
+				}
+
+				$data["page"]=$page;
+				$data["u"]=$u;
+				$this->load->view('pub/head');
+				$this->load->view('pub/nav', $data);
+				$this->load->view('pub/header', $data);
+				if($p) $this->load->view('pub/userpage', $data);
+				else $this->load->view('pub/user_biography', $data);
+				$this->load->view('pub/footer');
+				return;
+			}
+		}
+		// users list
+		$data["page"]=$page;
+		$this->load->view('pub/head');
 		$this->load->view('pub/nav', $data);
 		$this->load->view('pub/header', $data);
 		$this->load->view('pub/stafflist', $data);
