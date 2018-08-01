@@ -4,7 +4,7 @@
 <tr><th><?=lang("Title")?></th><th></th></tr>
     <?php if( is_array($pages) and count($pages)>0 ) { 
        foreach($pages as $p){ ?>
-    <tr><td pid="<?=$p->pid?>"><?=$p->title?></td>
+    <tr><td pid="<?=$p->pid?>" <?php if($p->status==STATUS_PRIVATE) echo "class='private' "?> ><?=$p->title?></td>
     <td class="page-tools text-right" style="font-size:130%;">
         <a href="/users/page_edit/<?=$p->pid?>" title="<?=lang("Edit_page")?>"><span class="fa fa-edit"></a> 
         <a class="page_remove" pid="<?=$p->pid?>" href="#" title="<?=lang("Delete_page")?>"><span class="fa fa-trash"></a>

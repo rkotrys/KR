@@ -21,7 +21,7 @@
       </li>
       <?php endif ?>
       
-      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/pub?>"><?=lang("Front")?></a></li>
+      <li class="nav-item"><a class="nav-link bg-dark rounded"  href="/u/<?=$this->user["surname"]?>/" target="_blank"><?=lang("Front")?></a></li>
       <li class="nav-item"><a class="nav-link bg-dark rounded" href="/pages/<?=$this->user["uname"]?>"><?=lang("Pages")?></a></li>
       <li class="nav-item"><a class="nav-link bg-dark rounded" href="/files/<?=$this->user["uname"]?>"><?=lang("Files")?></a></li>
     </ul>

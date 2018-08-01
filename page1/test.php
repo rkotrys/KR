@@ -31,11 +31,7 @@ $(document).ready(function(){
 
 	$('input[type=file]').change(function(){
 
-<<<<<<< HEAD
 		$(this).simpleUpload("/cmd/phupload", {
-=======
-		$(this).simpleUpload("/ajax/upload.php", {
->>>>>>> 1a17379780f224e602e800b0b9372c683a64a337
 
 			start: function(file){
 				//upload started

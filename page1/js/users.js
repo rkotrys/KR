@@ -122,6 +122,8 @@ $(document).ready(function(){
                     $("#level [value='"+u['level']+"']").attr("selected", ""); 
                     $("#userphoto").attr("src","/"+u.photo);
                     $("#userphoto_path").val(u.photo);
+                    $("#status [value='"+u['status']+"']").attr("selected", ""); 
+
                }else{
                 alert('Error! user data not found');
                }

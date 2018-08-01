@@ -68,6 +68,7 @@ class Users_model extends CI_Model {
         if( $name!=NULL ) $this->db->where('name', $name);
         $this->db->where('status', STATUS_PUBLIC);
         $query = $this->db->get('users');
+        
         if( $query->num_rows()==1 ){
             return lang_select($query->row_array());
         }else{

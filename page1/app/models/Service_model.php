@@ -249,12 +249,12 @@ public function get_menus($where=NULL,$order=NULL,$limit=NULL,$offset=NULL){
     }
 }
 
-public function get_usermenu($level=0, $parent=NULL, $menu=array() ){
-    if( $m0 = $this->get_smb( $level, $parent ) ){
+public function get_usermenu($user=NULL, $level=0, $parent=NULL, $menu=array() ){
+    if( $m0 = $this->get_smb( $user, $level, $parent ) ){
         $submenu=array();
         foreach($m0 as $m ){
             $submenu[] = $m;
-            if( $sm = $this->get_usermenu( $level+1, $m->mid, $menu ) ){
+            if( $sm = $this->get_usermenu( $user, $level+1, $m->mid, $menu ) ){
                 $submenu = array_merge($submenu,$sm);
             }
         }
@@ -263,8 +263,8 @@ public function get_usermenu($level=0, $parent=NULL, $menu=array() ){
         return NULL;
     }
 }
-public function get_smb($level,$parent=NULL,$position=0){
-    $userid=$this->user["userid"];
+public function get_smb($user=NULL, $level,$parent=NULL,$position=0){
+    $userid=($user==NULL)?$this->user["userid"]:$user;
     if( $parent!=NULL ) $whereparent = " and parent='$parent' "; else $whereparent = "";
     $query = $this->db->where(" userid='$userid' and lang='".$this->session->language."' and level='$level' and position>='$position' $whereparent")->order_by(" position ASC  ")->get('menu');
     if( $query->num_rows()>0 ){

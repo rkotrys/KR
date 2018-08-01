@@ -154,7 +154,11 @@ nav .navbar li .btn-group-vertical {
   padding:10px;
   text-shadow: 1px 1px 1px #fff;
   
-}  
+} 
+.staff-card a, .staff-card a:visited, .staff-card a:hover {
+    text-decoration: none;
+    color: #333;
+}
 .staff-card .panel-heading,
 .staff-card .panel-body,
 .staff-card .panel-footer  {
@@ -197,5 +201,18 @@ nav .navbar li .btn-group-vertical {
   border-radius: 0 0 5px 5px;
   text-align: center;
 }
-
+.userpage {
+  background-color: rgba(220,250,240,0.9);
+  color: #333;
+  border-radius: 5px;
+  margin-top: 70px;
+}
+.userpage h1 {
+  padding: 10px;
+  margin:0 0 30px 0;
+  border-bottom: 4px solid #D9241C;
+}
+.private {
+  color: #aaa;
+}
 /*# sourceMappingURL=back.css.map */

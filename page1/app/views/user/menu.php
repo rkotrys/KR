@@ -6,7 +6,7 @@
 <tr><th><?=lang("Menu_label")?></th><th style="width:50px;"></th></tr>  
 <?php $mu=NULL; foreach($menu as $k=>$m): ?>
 <tr>
-  <td class="menuitem-<?=$m->level?>"><div class="tabmenuitem"><?=$m->text?></div>
+  <td class="menuitem-<?=$m->level?>"><div class="tabmenuitem<?php if($m->status==STATUS_PRIVATE) echo " private"; ?>"><?=$m->text?></div>
   <?php if( $mu!=NULL and $m->level<4 and $m->level==$mu->level): ?>
   <div class="submenuarrow" parent="<?=$mu->mid?>" mid="<?=$m->mid?>"><span class="fa fa-arrow-right" aria-hidden="true"></span></div>
 <?php endif; $mu=$m; ?>

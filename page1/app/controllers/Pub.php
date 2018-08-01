@@ -36,20 +36,38 @@ class Pub extends CI_Controller {
 			else $u=$this->users->get_user_by_surname($surname);
 			if( $u ){
 				// user page
-
+				$menu = $this->service->get_usermenu($u["userid"]);
 				$page['title']=lang("User_biography");
 				$page["content"]=$u['resume'];
+
 				$p=false;
-				if( ($pid != NULL) and ($p = $this->service->get_page($pid)) ){
-					$page['title']=$p->title;
-					$page["content"]=$p->content;
+				if( $pid != NULL ){
+					$pida = explode("-",$pid);
+					if( isset($pida[1]) and $pida[1]>0 ){ 
+						if( $p = $this->service->get_page($pida[1]) ){
+							$page['title']=$p->title;
+							$page["content"]=$p->content;
+						}
+					}else{
+						foreach( $menu as $m ){
+							$rchar = array(" ", "?", "'", "`", "\n", "\t", "^", "-");
+							$mitem = strtolower(str_replace($rchar,"_",$m->text));
+							if( ($pida[0]==$mitem) and ($p = $this->service->get_page($m->pid)) ){
+								$page['title']=$p->title;
+								$page["content"]=$p->content;
+								break;
+							}
+						}
+//						exit;
+					}
 				}
 
+				$data["menu"] = $menu;
 				$data["page"]=$page;
 				$data["u"]=$u;
 				$this->load->view('pub/head');
 				$this->load->view('pub/nav', $data);
-				$this->load->view('pub/header', $data);
+				//$this->load->view('pub/header', $data);
 				if($p) $this->load->view('pub/userpage', $data);
 				else $this->load->view('pub/user_biography', $data);
 				$this->load->view('pub/footer');

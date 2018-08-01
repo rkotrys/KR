@@ -2,11 +2,13 @@
     <div class="row">
     <?php foreach($stafflist as $staff):  $username=$staff["name"]." ".$staff["surname"].", ".$staff["title"];?>
         <div class="col-lg-4 col-md-6 col-sm-12 staff-card" >
+
+        <a href="/u/<?=$staff["surname"]?>" title="<?=$username?>" >
         <panel class="panel panel-default">
             <div class="panel-heading"><?=$username?>
             </div>
             <div class="panel-body">
-            <img src="<?=(is_file($staff['photo']))?"/".$staff['photo']:"/images/staff/profile-default-male.png"?>" alt="<?=$username?>" title="<?=$username?>" />
+            <img src="<?=(is_file($staff['photo']))?"/".$staff['photo']:"/images/avatar.png"?>" alt="<?=$username?>" title="<?=$username?>" />
             <div class="panel-body-text">
                 <p class="text-center" style="padding:10px 0;"><?=$staff["subtitle"]?>&nbsp;</p>
                 <p><span><?=lang("user_room")?>:</span> <?=$staff["room"]?></p>
@@ -19,6 +21,8 @@
             <p><span><?=lang("user_duty")?>:</span> <?=$staff["duty"]?></p>
             </div>
         </panel>
+        </a>
+        
         </div>
     <?php endforeach; ?>
     </div>

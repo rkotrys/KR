@@ -233,14 +233,14 @@ class Users extends CI_Controller {
 		$m->parent=$par[0];
 		$m->position=$par[1];
 		$m->level=$par[2];
-		if( $level0 = $this->service->get_smb(0) ){
+		if( $level0 = $this->service->get_smb($this->user['userid'], 0) ){
 			if( $m->parent==-1 and $m->position==-1 ){
 				$m->position = count($level0);
 				$m->level = 0;
 				$m->parent = 0;
 			}else{
 				//$m->position += 1;	
-				$menu = $this->service->get_smb($m->level, $m->parent);
+				$menu = $this->service->get_smb($this->user['userid'], $m->level, $m->parent);
 				if( $menu!==NULL ){
 					$p=0;
 					foreach($menu as $mu){
