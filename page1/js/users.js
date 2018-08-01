@@ -120,7 +120,8 @@ $(document).ready(function(){
                     $("#subtitle").val(u['subtitle']); 
                     $("#resume").html(u['resume']); 
                     $("#level [value='"+u['level']+"']").attr("selected", ""); 
-                    $("#userphoto").attr("src","/"+u.photo);
+                    if( u.photo==""  ) $("#userphoto").attr("src","/images/avatar.png");
+                    else $("#userphoto").attr("src","/"+u.photo);
                     $("#userphoto_path").val(u.photo);
                     $("#status [value='"+u['status']+"']").attr("selected", ""); 
 

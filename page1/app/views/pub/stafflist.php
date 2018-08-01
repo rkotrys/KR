@@ -1,6 +1,10 @@
 <div class="container stafflist" >
     <div class="row">
-    <?php foreach($stafflist as $staff):  $username=$staff["name"]." ".$staff["surname"].", ".$staff["title"];?>
+    <?php 
+    foreach($stafflist as $staff):  
+        if($staff["status"]==STATUS_PRIVATE) continue;
+        $username=$staff["name"]." ".$staff["surname"].", ".$staff["title"];
+    ?>
         <div class="col-lg-4 col-md-6 col-sm-12 staff-card" >
 
         <a href="/u/<?=$staff["surname"]?>" title="<?=$username?>" >

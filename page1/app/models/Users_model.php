@@ -28,7 +28,7 @@ class Users_model extends CI_Model {
 
     public function get_users(){
         $users = array();
-        $query = $this->db->get('users');
+        $query = $this->db->order_by("surname ASC")->get('users');
         foreach( $query->result_array() as $row ){
             $users[$row['userid']] = lang_select($row);
         }
@@ -80,8 +80,10 @@ class Users_model extends CI_Model {
         if($status > -1) $this->db->where("status",$status);
         $this->db->order_by("surname ASC")->get("users");
         $query=$this->db->get("users");
+        $users=array();
+        $n=0;
         foreach( $query->result_array() as $row ){
-            $users[$row['userid']] = lang_select($row);
+            $users[$n++] = lang_select($row);
         }
         return $users;
     }

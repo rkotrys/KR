@@ -215,4 +215,9 @@ nav .navbar li .btn-group-vertical {
 .private {
   color: #aaa;
 }
+div.users .panel-body img,
+#adduserModal img {
+  width: 100px;
+  border-radius: 5px;
+}
 /*# sourceMappingURL=back.css.map */

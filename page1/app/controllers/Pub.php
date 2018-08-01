@@ -58,7 +58,6 @@ class Pub extends CI_Controller {
 								break;
 							}
 						}
-//						exit;
 					}
 				}
 
