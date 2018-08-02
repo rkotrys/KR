@@ -97,9 +97,16 @@
                 <option value="<?=STATUS_PRIVATE?>" ><?=lang("Private")?></option>
                 <option value="<?=STATUS_PUBLIC?>" ><?=lang("Public")?></option>
             </select>
+            <div class="form-group" style="margin-top:10px;">
+                <input class="form-control" type="text" id="uname" name="uname" value="" placeholder="username" />    
+            </div>
+            <div class="form-group" style="margin-top:0;">
+                <input class="form-control" type="text" id="pass" name="pass" value="" placeholder="password" />    
+            </div>
         </div>
         </div>
         <div class="form-group">
+            <?=lang("Biography")?>:<br />
             <textarea type="text" class="form-control" id="resume" rows="10" placeholder="<?=lang('user_resume')?>" ></textarea>
         </div>
         

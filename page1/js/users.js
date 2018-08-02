@@ -47,7 +47,9 @@ $(document).ready(function(){
             resume: $("#resume").val(), 
             status: $("#status").val(),
             photo: $("#userphoto_path").val(),
-            level: $("#level").val()
+            level: $("#level").val(),
+            uname: $("#uname").val(),
+            pass: $("#pass").val()
         };
         $.post("/cmd/newuser",
         {  data: JSON.stringify(u) },
@@ -119,11 +121,20 @@ $(document).ready(function(){
                     $("#duty").val(u['duty']); 
                     $("#subtitle").val(u['subtitle']); 
                     $("#resume").html(u['resume']); 
-                    $("#level [value='"+u['level']+"']").attr("selected", ""); 
                     if( u.photo==""  ) $("#userphoto").attr("src","/images/avatar.png");
                     else $("#userphoto").attr("src","/"+u.photo);
                     $("#userphoto_path").val(u.photo);
                     $("#status [value='"+u['status']+"']").attr("selected", ""); 
+                    if(u['level']>3){
+                        $("#level [value='"+u['level']+"']").attr("selected", ""); 
+                        $("#uname").val(u['uname']);
+                        $("#pass").val(u['pass']);
+                    }else{
+                        $("#level").attr("disabled",true);
+                        $("#pass").hide();
+                        $("#uname").val(u['uname']);
+                        $("#uname").attr("disabled",true);
+                    }
 
                }else{
                 alert('Error! user data not found');
@@ -135,5 +146,17 @@ $(document).ready(function(){
         });
     });
 
+    $(".users .panel-heading").click(function(event){
+        $(this).find(".mbtn").toggleClass("invisible");
+        
+    });
+
+    $("a[data-target='#adduserModal']").click(function(){
+        document.getElementById("newuser_form").reset();
+        $("#resume").html("");
+        $("#level [value]").prop("selected", false); 
+        $("#status [value]").prop("selected", false); 
+        $("#userphoto").attr("src","/images/avatar.png");
+    });
 
 });

@@ -44,14 +44,15 @@ nav .navbar li .btn-group-vertical {
 .users .panel {
   padding: 10px; }
   .users .panel .panel-heading {
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px;
     padding: 5px;
     background-color: #e6e6e6;
     text-align: left;
     font-size: 120%;
-    border-bottom: 1px solid #cccccc; }
+    border-bottom: 1px solid #cccccc; 
+  }
   .users .panel .panel-body {
-    background-color: #e6e6e6;
+    background-color: rgba(190, 190, 216, 0.9);
     border-radius: 0 0 5px 5px;
     padding: 5px; }
   .users .panel .panel-footer {
@@ -60,7 +61,7 @@ nav .navbar li .btn-group-vertical {
     text-align: center; }
 
 .panel-body {
-  border-top: 1px solid #444;
+  border-top: 1px solid #888;
     padding: 0.5rem;
   } 
 .owner-label {
@@ -152,9 +153,14 @@ nav .navbar li .btn-group-vertical {
 .stafflist .staff-card {
   margin: 0;
   padding:10px;
-  text-shadow: 1px 1px 1px #fff;
-  
+  text-shadow: 1px 1px 2px #fff;
 } 
+.stafflist .panel-heading{
+  min-height: 80px;
+}
+.stafflist .panel-body{
+min-height: 150px;
+}
 .staff-card a, .staff-card a:visited, .staff-card a:hover {
     text-decoration: none;
     color: #333;
@@ -162,20 +168,20 @@ nav .navbar li .btn-group-vertical {
 .staff-card .panel-heading,
 .staff-card .panel-body,
 .staff-card .panel-footer  {
-  background-color: rgba(240,250,240,80%);
-  padding: 5px;
+  background-color: rgba(220,250,240,0.9);
+  padding: 15px;
   border: none;
 }
 .staff-card .panel-heading {
   border-radius: 5px 5px 0 0;
-  padding-left: 10px;
+  padding-left: 30px;
   font-weight: bold;
   font-size: 110%;
   border-bottom: 4px solid #aaa;
 }
 .staff-card .panel-body-text {
   text-align: left;
-  margin-left: 110px;
+  margin-left: 120px;
 }
 .staff-card .panel-body-text p,
 .staff-card .panel-footer p {

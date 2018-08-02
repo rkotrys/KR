@@ -25,7 +25,7 @@ class Pub extends CI_Controller {
     
     public function index($name=NULL,$pid=NULL)
 	{
-		$page['title']= "<span class=\"fa fa-users\"></span> ".lang('Staff');
+		$page['title']= ""; // "<span class=\"fa fa-users\"></span> ".lang('Staff');
 		$data['stafflist'] = $this->users->get_stafflist();
 
 		if($name!=NULL){
