@@ -249,6 +249,7 @@ div.users .panel-body img,
 }
 #adduserModal div.tabs .active div {
   background-color: #fff;
+  box-shadow: 0 -2px 3px #666;
 }
 #adduserModal div.tabs div {
   width: 30%;
@@ -267,5 +268,7 @@ div.users .panel-body img,
   border: 1px solid #888;
   position: relative;
   top: -1px;
+  border-radius: 0 5px 5px 5px; 
+  box-shadow: 0 2px 3px #666;
 }
 /*# sourceMappingURL=back.css.map */

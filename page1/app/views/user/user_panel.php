@@ -4,7 +4,7 @@
                     <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary useredit"><span class="fa fa-edit"></span></a> 
                     <a userid="<?=$user["userid"]?>" href="#" onclick="" class="btn btn-sm btn-outline-primary userdelete"><span class="fa fa-trash"></span></a>
                 </div>
-                <?=$user['name']." ".$user['surname']?>, <?=$user["title"]?><br />
+                <a href="/u/<?=$user['surname']?>" target="_blank"><strong><?=$user['name']." ".$user['surname']?></strong></a>, <?=$user["title"]?><br />
                 <small><?=$user["subtitle"].", ".$user["uname"].", ".conf("ac_levels")[$user['level']]." ";?></small>
                 </div>
                 <div class="panel-body panel-collapse collapse continer" id="user<?=$user["userid"]?>">

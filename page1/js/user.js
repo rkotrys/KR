@@ -71,45 +71,8 @@ $(document).ready(function(){
         });
         $("#adduserModal").modal("hide");
     });
-    /* userdelete */
-    $(".userdelete").click(function(){
-        var userid = $(this).attr("userid");
-        $.post("/cmd/getuser",
-        { data: userid },
-        function(data, status){
-            /* alert("Data: " + data + "\nStatus: " + status); */
-            if( status=='success'){
-               if( data['status']=='OK' ){
-                    $("#username").html(data['data']['name']+' '+data['data']['surname']); 
-               }else{
-                    $("#deluserModal .modal-body h2").html(data['data']);
-               }
-            }else{
-                alert('Error! data link failed');
-            }
-            $("#deluser").click(function(){
-                $.post("/cmd/deleteuser",
-                { data: userid },
-                function(data, status){
-                    if( status=='success'){
-                        if( data['status']=='OK' ){
-                            $("#deluserModal .modal-body h2").html('OK');
-                            window.setTimeout(function(){ location.reload(); }, 1000 );
-                        }else{
-                            $("#deluserModal .modal-body h2").html(data['data']);
-                        }
-                     }else{
-                        $("#deluserModal .modal-body h2").html('Error! data link failed');
-                     }
-                    $("#deluserModal").delay(3000).modal("hide");
-                });
-            });
-            
-            $("#deluserModal").modal("show"); 
-        });
-    });
 
-    $(".useredit").click(function(event){
+    $("#userinfo").click(function(event){
         $("#adduserModal .tabs a[data-target]").removeClass("active");
         $("#adduserModal .tabs textarea[id!='resume']").hide();
         $("#resume").show();
@@ -183,7 +146,4 @@ $(document).ready(function(){
         $($(this).attr("data-target")).show();
     })
 
-    $("#userinfo").click(function(event){
-        alert("x");
-    })
 });

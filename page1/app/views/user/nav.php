@@ -7,7 +7,9 @@
   <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="navbar-nav">
     <?php if($this->user["level"]==LEVEL_ADMIN): ?>
-    <li class="nav-item"><span class="nav-link bg-dark rounded" title=" ".<?=$this->user["name"]?>." ".<?=$this->user["surname"]?>.", ".<?=$this->user["title"]?>"><span class="fa fa-user"></span> <?=$this->user["name"]." ".$this->user["surname"]?></span></li>
+    <li class="nav-item">
+      <span class="nav-link bg-dark rounded" id="userinfo" userid="<?=$this->user["userid"]?>" title="<?=$this->user["name"]?> <?=$this->user["surname"]?>, <?=$this->user["title"]?>" level="<?=$this->user["level"]?>" ><span class="fa fa-user"></span> <?=$this->user["name"]." ".$this->user["surname"]?></span>
+    </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle bg-dark rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admin

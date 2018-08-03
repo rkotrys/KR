@@ -64,11 +64,13 @@ class Users extends CI_Controller {
 		$data["pages"] = $this->page_list();
 		$data["menu"] = $this->service->get_usermenu();
 		$data["files"] = "";
+		$data["scripts"] = array( $this->toscript("simpleUpload.min"), $this->toscript("user") ) ;
 		
-		$this->load->view('user/head');
-		$this->load->view('user/nav', $data);
-		$this->load->view('user/header', $data);
-		$this->load->view('user/home', $data); 
+		$this->load->view('user/head',	$data );
+		$this->load->view('user/nav', 	$data );
+		$this->load->view('user/header',$data );
+		$this->load->view('user/home', 	$data); 
+		$this->load->view('user/add_user_modal',$data); 
 		$this->load->view('user/footer');
 	}
 
@@ -281,6 +283,9 @@ class Users extends CI_Controller {
 	}
 
 
+	private function toscript($name){
+		return "<script src=\"".conf("base_url_path")."js/".$name.".js\"></script>";
+	}
 /*-------------------- INSTALL CODE -----------------------*/	
 // TD
 	public function resetdb( $dbfile="" ){

@@ -13,14 +13,14 @@
         <div class="continer">
             <div class="row">
             <div class="form-group col-3" >
-            <?=lang("Status")?>:
+                <label class="tab-label"><?=lang("Status")?>:</label>
                 <select class="form-control" id="status" name="status">
                     <option value="<?=STATUS_PRIVATE?>" ><?=lang("Private")?></option>
                     <option value="<?=STATUS_PUBLIC?>" ><?=lang("Public")?></option>
                 </select>
             </div>    
             <div class="form-group col-3" >
-                <?=lang("user_level")?>:
+                <label class="tab-label"><?=lang("user_level")?>:</label>
                 <select class="form-control" id="level" name="level">
                     <?php $levels=conf("ac_levels"); foreach(conf("ac_levels") as $k=>$v): ?>
                     <?php if( $v!="Owner"): ?>
@@ -30,10 +30,12 @@
                 </select>
             </div>    
             <div class="form-group col-3" >
-                <?=lang("user_uname")?>: <input class="form-control" type="text" id="uname" name="uname" value="" placeholder="username" />    
+                <label class="tab-label"><?=lang("user_uname")?>:</label> 
+                <input class="form-control" type="text" id="uname" name="uname" value="" placeholder="username" />    
             </div>    
             <div class="form-group col-3" >
-                <?=lang("user_pass")?>: <input class="form-control" type="text" id="pass" name="pass" value="" placeholder="password" />
+                <label class="tab-label"><?=lang("user_pass")?>:</label> 
+                <input class="form-control" type="text" id="pass" name="pass" value="" placeholder="password" />
             </div>    
             </div>
         </div>
