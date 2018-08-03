@@ -2,7 +2,7 @@
 
 class Users_model extends CI_Model {
 
-    private $en = array("title", "subtitle", "duty", "resume");
+    private $en = array("title", "subtitle", "duty", "room", "resume", "interest", "papers" );
     private function lang_set($u){
         $r=array();
         $s=lang_sufix();

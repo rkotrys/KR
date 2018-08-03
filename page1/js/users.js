@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    $("#adduserModal .tabs textarea").hide();
+
     $("#photo").change(function(){
         if( $("#userid").val()>0 ){
             var url="/cmd/phupload/"+$("#userid").val();
@@ -102,7 +104,8 @@ $(document).ready(function(){
         });
     });
 
-    $(".useredit").click(function(){
+    $(".useredit").click(function(event){
+        //event.preventDefault();
         $.post("/cmd/getuser",
         {
             data: $(this).attr("userid")
@@ -159,4 +162,10 @@ $(document).ready(function(){
         $("#userphoto").attr("src","/images/avatar.png");
     });
 
+    $("#adduserModal .tabs a[data-target]").click(function(event){
+        $("#adduserModal .tabs a[data-target]").removeClass("active");
+        $(this).addClass("active");
+        $("#adduserModal .tabs textarea[id!='resume']").hide();
+        $($(this).attr("data-target")).show();
+    })
 });
