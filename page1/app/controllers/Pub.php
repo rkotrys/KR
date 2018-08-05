@@ -80,9 +80,9 @@ class Pub extends CI_Controller {
 		$this->load->view('pub/header', $data);
 		$this->load->view('pub/stafflist', $data);
 		$this->load->view('pub/footer');
-    }
-
-
+	}
+	
+	
 
 
 
