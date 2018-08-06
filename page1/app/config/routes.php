@@ -75,6 +75,11 @@ $route['u'] = 'pub/index/$1';
 $route['u/(:any)'] = 'pub/index/$1';
 $route['u/(:any)/(:any)'] = 'pub/index/$1/$2';
 
+$route['f'] = 'users/file/$1';
+$route['f/(:any)'] = 'users/file/$1';
+$route['f/(:any)/(:any)'] = 'users/file/$1/$2';
+
+
 //$route['cmd'] = $route['default_controller'].'/cmd';
 //$route['cmd/(:any)'] = $route['default_controller'].'/cmd/$1';
 

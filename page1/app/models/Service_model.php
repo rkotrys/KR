@@ -31,6 +31,7 @@ class File {
     public $name = NULL;
     public $alias;
     public $path = NULL;
+    public $mime = NULL;
 }
 
 class Menu {

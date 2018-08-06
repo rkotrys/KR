@@ -173,15 +173,18 @@ class Cmd extends CI_Controller {
     }
 
     public function get_filelist($type="file",$userid=NULL){
+        $d="";
         if( $type=='file'){
             $id=(is_numeric($userid)?$userid:$this->user["userid"]);
-            $path = "./doc/$id/files";
-            $dir = scandir($path);
-            $d="";
-            foreach($dir as $k=>$v){
-                if( is_file($path."/".$v) ) {
-                    $d.="<button class='btn fileitem'>$v</button>";
+            if( $files = $this->service->get_files("userid='$id' and status='".STATUS_PUBLIC."'", "name ASC")){
+                foreach($files as $k=>$f){
+                    if( is_file( "./doc/$id/files/".$f->name ) ) {
+                        $key=($f->ackey!="")?"key='1'":"";
+                        $d.="<button class='btn fileitem' fid='".$f->fid."' $key >$f->name</button>";
+                    }
                 }
+            }else{
+                $d = "<div class='text-center'>".lang("no_files_found")."</div>";
             }
             echo $d;
         }
@@ -207,12 +210,15 @@ class Cmd extends CI_Controller {
         print( json_encode( $f, JSON_UNESCAPED_UNICODE) );
     }
     public function delete_file($fid=NULL){
+        $uploaddir = "/doc/".$this->user["userid"]."/files/";
         $access=true;
         $f = $this->service->get_file($fid);
         if(!isset($f->userid)) $access=false;
         elseif( $f->userid!=$this->user['userid'] and $this->user['level']<$f->edr) $access=false;
         if($access){
-           $data = array( 'result'=>$this->service->delete_file($fid), 'status'=>"OK" );
+            $filename = "." . $uploaddir . $f->name;
+            unlink($filename);
+            $data = array( 'result'=>$this->service->delete_file($fid), 'status'=>"OK" );
         }else{
             $data = array( 'result'=>"Forbiden", 'status'=>"ERROR" );
         }

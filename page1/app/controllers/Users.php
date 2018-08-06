@@ -122,6 +122,7 @@ class Users extends CI_Controller {
 	}
 
 	public function files($uname="guest"){
+		
 		if( $this->input->post("fid")>0 ){
 			// update
 			if( is_object($file=$this->service->get_file($this->input->post("fid")))){
@@ -143,6 +144,8 @@ class Users extends CI_Controller {
 			if( isset($_FILES['userfile']) and is_uploaded_file( $_FILES['userfile']['tmp_name'] ) ){
 				$uploaddir = "/doc/".$this->user["userid"]."/files/";
 				$fname = basename($_FILES['userfile']['name']);
+				$mime = $_FILES['userfile']['type'];
+				$fsize = $_FILES['userfile']['size'];
 				$uploadfile = "." . $uploaddir . $fname;
 				if(is_file($uploadfile)) {
 					$path = pathinfo($fname);
@@ -150,7 +153,8 @@ class Users extends CI_Controller {
 					$uploadfile = "." . $uploaddir . $fname;
 				}	
   			    $file = new File;
-			    $file->name = $fname;
+				$file->name = $fname;
+				$file->mime = $mime;
 				$file->alias = $this->input->post("alias");
 				$file->path = $uploaddir . $fname;
 				$file->userid = $this->user["userid"];
@@ -176,6 +180,29 @@ class Users extends CI_Controller {
 		$this->load->view('user/header', $data);
 		$this->load->view('user/files', $data); 
 		$this->load->view('user/footer');
+	}
+	public function file($fid=NULL,$key=NULL){
+		
+		if($fid>0 and $f=$this->service->get_file($fid) ){
+			$fname = "./doc/".$f->userid."/files/".$f->name;
+			if( file_exists($fname) and ($f->status==STATUS_PUBLIC) and ($this->user["level"] >= $f->acr) and ($key==$f->ackey)){
+				header('Content-Description: File Transfer');
+				header('Content-Type: '.$f->mime);
+				header( 'Content-Disposition: attachment; filename='.$f->name );
+				header('Content-Transfer-Encoding: binary');
+				header('Expires: 0');
+				header('Cache-Control: must-revalidate');
+				header('Pragma: public');
+				header('Content-Length: ' . filesize($fname));
+				ob_clean();
+				flush();
+				readfile($fname);
+				exit;
+			}
+		}
+		header('HTTP/1.0 403 Forbidden', true, 403);
+		echo "<html><head><head><body style=\"background-color:#666;margin:0;padding:0;\"><h1 style=\"text-align:center;color:red;padding:3em;margin:1em;border: 2px solid #ccc;border-radius: 10px;background-color:#fff;\"><img src=\"/images/forbiden.png\" /><br />Access Forbiden!</h1></body></html>";
+		exit;
 	}
 
 	public function imgupload(){

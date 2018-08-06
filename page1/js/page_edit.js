@@ -52,7 +52,9 @@ function smodal(filetype, callback ){
                             function(){
                                 $(".fileitem").click(function(){
                                     $("#selectModal").modal("hide");
-                                    callback("/doc/"+userid+"/files/"+$(this).html(),{text:"document",title:$(this).html()});
+                                    var key;
+                                    if( $(this).attr("key")==1 ) key="Access key required!"; else key=$(this).text();
+                                    callback("/f/"+$(this).attr("fid"),{text:$(this).text(),title: key});
                                 })
                             });
         //$("#filelist").html("xxx");
