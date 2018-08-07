@@ -77,7 +77,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center">
         <div id="filelist" userid="<?=$user["userid"]?>"></div>
       </div>
       <div class="modal-footer">

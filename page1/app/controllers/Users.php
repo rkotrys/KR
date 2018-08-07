@@ -21,6 +21,7 @@ class Users extends CI_Controller {
 		$this->load->database();
 		$this->user=$this->users->get_user($this->session->user);
 		if( !isset($this->user["userid"]) or $this->user["level"]<LEVEL_STAFF ) redirect("/logout");
+		if( !$this->session->key ) $this->session->set_userdata('key', bin2hex($this->encryption->create_key(16)) );
 
     }
     
@@ -182,13 +183,16 @@ class Users extends CI_Controller {
 		$this->load->view('user/footer');
 	}
 	public function file($fid=NULL,$key=NULL){
-		
+		//echo "xxx";exit;
 		if($fid>0 and $f=$this->service->get_file($fid) ){
 			$fname = "./doc/".$f->userid."/files/".$f->name;
-			if( file_exists($fname) and ($f->status==STATUS_PUBLIC) and ($this->user["level"] >= $f->acr) and ($key==$f->ackey)){
+			$userkey = true;
+			if( $f->ackey!="" ) $userkey = (md5($this->session->key.$f->ackey)==$key);
+			if( file_exists($fname) and ($f->status==STATUS_PUBLIC) and ($this->user["level"] >= $f->acr) and $userkey)
+			{
 				header('Content-Description: File Transfer');
 				header('Content-Type: '.$f->mime);
-				header( 'Content-Disposition: attachment; filename='.$f->name );
+				header('Content-Disposition: attachment; filename="'.($f->name).'"' );
 				header('Content-Transfer-Encoding: binary');
 				header('Expires: 0');
 				header('Cache-Control: must-revalidate');
@@ -199,9 +203,10 @@ class Users extends CI_Controller {
 				readfile($fname);
 				exit;
 			}
+			
 		}
 		header('HTTP/1.0 403 Forbidden', true, 403);
-		echo "<html><head><head><body style=\"background-color:#666;margin:0;padding:0;\"><h1 style=\"text-align:center;color:red;padding:3em;margin:1em;border: 2px solid #ccc;border-radius: 10px;background-color:#fff;\"><img src=\"/images/forbiden.png\" /><br />Access Forbiden!</h1></body></html>";
+		echo "<!DOCTYPE html><head><head><body style=\"background-color:#666;margin:0;padding:0;\"><h1 style=\"text-align:center;color:red;padding:3em;margin:1em;border: 2px solid #ccc;border-radius: 10px;background-color:#fff;\"><img src=\"/images/forbiden.png\" /><br />Access Forbiden!</h1></body></html>";
 		exit;
 	}
 

@@ -180,7 +180,8 @@ class Cmd extends CI_Controller {
                 foreach($files as $k=>$f){
                     if( is_file( "./doc/$id/files/".$f->name ) ) {
                         $key=($f->ackey!="")?"key='1'":"";
-                        $d.="<button class='btn fileitem' fid='".$f->fid."' $key >$f->name</button>";
+                        $name = ($f->alias!="")?$f->alias:$f->name;
+                        $d.="<button class='btn fileitem aclevel".$f->acr."' fid='".$f->fid."' $key >"."<span class='fa fa-file pull-left'></span>".character_limiter($name,40)."</button>";
                     }
                 }
             }else{

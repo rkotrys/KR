@@ -21,6 +21,7 @@ class Pub extends CI_Controller {
 			$this->user=$this->users->get_user_by_uname( "guest" );
 			$this->session->set_userdata('user',$this->user["userid"]);
 		}
+		if( !$this->session->key ) $this->session->set_userdata('key', bin2hex($this->encryption->create_key(16)) );
     }
     
     public function index($name=NULL,$pid=NULL)

@@ -23,15 +23,16 @@
             <?php 
             $names_status=conf("item_status");
             $names_levels=conf("ac_levels");
-            foreach( $files as $f ): ?>
+            foreach( $files as $f ): 
+            ?>
             <tr>
             <td><?=$f->fid?></td>
-            <td><?=$f->name?></td>
-            <td><?=$f->alias?></td>
-            <td><?=lang($names_status[$f->status])?></td>
-            <td><?=$f->ackey?></td>
-            <td><?=lang($names_levels[$f->acr])?></td>
-            <td><?=lang($names_levels[$f->edr])?></td>
+            <td <?php if($f->status==STATUS_PRIVATE) echo "class='status-private'";?> ><?=$f->name?></td>
+            <td <?php if($f->status==STATUS_PRIVATE) echo "class='status-private'";?>><?=$f->alias?></td>
+            <td <?php if($f->status==STATUS_PRIVATE) echo "class='status-private'";?>><?=lang($names_status[$f->status])?></td>
+            <td <?php if($f->status==STATUS_PRIVATE) echo "class='status-private'";?>><?=$f->ackey?></td>
+            <td class="aclevel<?=$f->acr?>"><?=lang($names_levels[$f->acr])?></td>
+            <td <?php if($f->status==STATUS_PRIVATE) echo "class='status-private'";?>><?=lang($names_levels[$f->edr])?></td>
             <td style="fornt-size:150%;text-align:center;"><a class="fileedit" href="#" fid="<?=$f->fid?>"><span class="fa fa-edit"></span></a> <a class="filedelete" href="#" fid="<?=$f->fid?>" f-data="<?=$f->name?>"><span class="fa fa-trash"></span></a></td>
             </tr>    
             <?php endforeach ?>

@@ -17,6 +17,7 @@ class Welcome extends CI_Controller {
 		$this->lang->load('base', $this->session->language );
 		$this->input->set_cookie('uri', $this->uri->uri_string(), 60*60*24 );
 		$this->load->database();
+		if( !$this->session->key ) $this->session->set_userdata('key', bin2hex($this->encryption->create_key(16)) );
 	}
 
 	public function index()

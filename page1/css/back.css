@@ -68,17 +68,27 @@ nav .navbar li .btn-group-vertical {
   border-bottom: 1px solid #ccc;
   font-weight: bold;
 }  
+#filelist {
+  width: 100%;
+  height: 300px;
+  overflow: scroll;
+}
 .fileitem {
-  border: 1px solid #333;
+  border: 1px solid #888;
   border-radius: 3px;
   margin: 3px;
-  padding: 5px;
+  padding: 3px;
   display: inline-block;
-  width: 45%;
+  width: 48%;
+  text-align: left;
 }   
 .fileitem:hover {
   background-color: #ddd;
   box-shadow: 3px 3px 3px #000;
+}
+.fileitem span {
+  font-size: 110%;
+  padding-top: 3px;
 }
 .filelistimg {
   width:100px;
@@ -91,6 +101,7 @@ nav .navbar li .btn-group-vertical {
 .filelistimg:hover {
   box-shadow: 3px 3px 3px #000;
 }
+
 .deletedfilename, .deleteitem {
   text-align: center;
   font-weight: bold;
@@ -270,5 +281,17 @@ div.users .panel-body img,
   top: -1px;
   border-radius: 0 5px 5px 5px; 
   box-shadow: 0 2px 3px #666;
+}
+.aclevel0 {
+  color: #484;
+}
+.aclevel1 {
+  color: #448;
+}
+.aclevel2 {
+  color: #844;
+}
+.status-private {
+  color: #888;
 }
 /*# sourceMappingURL=back.css.map */

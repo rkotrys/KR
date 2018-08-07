@@ -30,8 +30,10 @@
     }
   endif;
   ?>
+</ul>
 
-  </div>
+</div>
+  
   <div class="float-right d-inline-flex flex-row-reverse">
       <a class="nav-link bg-dark rounded" href="/logout"><span class="fa fa-sign-out" title="<?=lang("Logout")?>"></span></a>
       <?php $this->load->view('login/language'); ?>
